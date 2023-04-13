@@ -1,4 +1,4 @@
-package com.beastlymc.data;
+package com.beastlymc.data.tree;
 
 import com.beastlymc.data.tree.AbstractBinaryTree;
 import com.beastlymc.data.tree.BinaryTree;
