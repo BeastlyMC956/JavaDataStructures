@@ -1,5 +1,8 @@
 package com.beastlymc.data.tree.heap;
 
+import com.beastlymc.data.tree.heap.Heap;
+import com.beastlymc.data.tree.heap.MaxHeap;
+import com.beastlymc.data.tree.heap.MinHeap;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +13,7 @@ class HeapTest {
     @Test
     void insert() {
         heap = new MaxHeap<>(10);
-        assertEquals(0, heap.size);
+        assertEquals(0, heap.getSize());
         heap.insert(35);
         heap.insert(33);
         heap.insert(42);
@@ -22,7 +25,7 @@ class HeapTest {
         heap.insert(26);
         heap.insert(31);
 
-        assertEquals(10, heap.size);
+        assertEquals(10, heap.getSize());
 
         assertTrue(heap.hasParent(0));
         assertTrue(heap.hasLeftChild(0));
@@ -56,7 +59,7 @@ class HeapTest {
     @Test
     void delete() {
         heap = new MinHeap<>(10);
-        assertEquals(0, heap.size);
+        assertEquals(0, heap.getSize());
         assertThrows(IllegalStateException.class, () -> heap.delete());
 
         heap.insert(35);
@@ -74,7 +77,7 @@ class HeapTest {
         assertEquals(14, heap.getParent(0));
 
         heap = new MaxHeap<>(10);
-        assertEquals(0, heap.size);
+        assertEquals(0, heap.getSize());
         assertThrows(IllegalStateException.class, () -> heap.delete());
 
         heap.insert(35);

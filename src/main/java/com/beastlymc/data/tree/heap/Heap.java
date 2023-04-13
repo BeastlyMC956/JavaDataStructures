@@ -47,7 +47,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The index of the parent of the element.
      */
-    protected int getParentIndex(int index) {
+    public int getParentIndex(int index) {
         return (index - 1) / 2;
     }
 
@@ -58,8 +58,12 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The index of the left child of the element.
      */
-    protected int getLeftChildIndex(int index) {
+    public int getLeftChildIndex(int index) {
         return (2 * index) + 1;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     /**
@@ -69,7 +73,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The index of the right child of the element.
      */
-    protected int getRightChildIndex(int index) {
+    public int getRightChildIndex(int index) {
         return (2 * index) + 2;
     }
 
@@ -80,7 +84,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return True if the element has a parent, false otherwise.
      */
-    protected boolean hasParent(int index) {
+    public boolean hasParent(int index) {
         return getParentIndex(index) >= 0;
     }
 
@@ -91,7 +95,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return True if the element has a left child, false otherwise.
      */
-    protected boolean hasLeftChild(int index) {
+    public boolean hasLeftChild(int index) {
         return getLeftChildIndex(index) < size;
     }
 
@@ -102,7 +106,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return True if the element has a right child, false otherwise.
      */
-    protected boolean hasRightChild(int index) {
+    public boolean hasRightChild(int index) {
         return getRightChildIndex(index) < size;
     }
 
@@ -113,7 +117,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The parent of the element.
      */
-    protected T getParent(int index) {
+    public T getParent(int index) {
         return heapArray.get(getParentIndex(index));
     }
 
@@ -124,7 +128,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The left child of the element.
      */
-    protected T getLeftChild(int index) {
+    public T getLeftChild(int index) {
         return heapArray.get(getLeftChildIndex(index));
     }
 
@@ -135,7 +139,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The right child of the element.
      */
-    protected T getRightChild(int index) {
+    public T getRightChild(int index) {
         return heapArray.get(getRightChildIndex(index));
     }
 

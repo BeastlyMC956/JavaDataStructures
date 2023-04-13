@@ -1,7 +1,9 @@
 package com.beastlymc.data;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.beastlymc.data.Queue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class QueueTest {
 

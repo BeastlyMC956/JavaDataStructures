@@ -4,7 +4,7 @@ import com.beastlymc.data.tree.AbstractBinaryTree;
 import com.beastlymc.data.tree.BinaryTree;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BinaryTreeTest {
 
@@ -18,16 +18,12 @@ class BinaryTreeTest {
         tree.add(2);
         tree.add(3);
 
-
-
         assertEquals(1, tree.getHead());
         assertEquals(2, tree.getLeftTree().getHead());
         assertEquals(3, tree.getRightTree().getHead());
 
         tree.add(4);
         tree.add(5);
-
-        System.out.println(tree);
 
         assertEquals(4, tree.getLeftTree().getLeftTree().getHead());
         assertEquals(5, tree.getLeftTree().getRightTree().getHead());
