@@ -30,10 +30,10 @@ jobs:
 
     - name: Run SuperLinter (CheckStyle)
       uses: github/super-linter@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        lint_mode: 'all'
-        fail_on_errors: false
-        debug: false
-        enable_colors: true
-        exclude: ".*Test.java"
+      env:
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: master
+        VALIDATE_JAVA: true
+        DISABLE_ERRORS: true
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        FILTER_REGEX_EXCLUDE: .*src/test.*
