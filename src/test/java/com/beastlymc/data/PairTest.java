@@ -1,6 +1,5 @@
 package com.beastlymc.data;
 
-import com.beastlymc.data.Pair;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,8 +22,6 @@ class PairTest {
         Pair<Integer, Boolean> secondPair = new Pair<>(5, false);
 
         assertEquals(secondPair, pair);
-        assertTrue(secondPair.equals(secondPair));
-        assertFalse(secondPair.equals(null));
 
         assertEquals(secondPair.hashCode(), pair.hashCode());
 

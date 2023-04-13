@@ -1,6 +1,5 @@
 package com.beastlymc.data;
 
-import com.beastlymc.data.Stack;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

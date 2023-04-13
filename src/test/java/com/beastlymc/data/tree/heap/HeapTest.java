@@ -1,8 +1,5 @@
 package com.beastlymc.data.tree.heap;
 
-import com.beastlymc.data.tree.heap.Heap;
-import com.beastlymc.data.tree.heap.MaxHeap;
-import com.beastlymc.data.tree.heap.MinHeap;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
