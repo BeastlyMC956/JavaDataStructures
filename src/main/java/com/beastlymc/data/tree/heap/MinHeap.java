@@ -17,7 +17,7 @@ public class MinHeap<T extends Comparable<T>> extends Heap<T> {
      *
      * @param maxSize The maximum size of the heap.
      */
-    public MinHeap(int maxSize) {
+    public MinHeap(final int maxSize) {
         super(maxSize);
     }
 
@@ -29,7 +29,7 @@ public class MinHeap<T extends Comparable<T>> extends Heap<T> {
      * @throws IllegalStateException if the heap is full.
      */
     @Override
-    public void insert(T element) {
+    public void insert(final T element) {
         if (size == heapArray.getCapacity()) {
             throw new IllegalStateException("Heap is full");
         }

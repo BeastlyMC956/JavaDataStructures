@@ -13,7 +13,7 @@ import com.beastlymc.data.array.Array;
  * @see Comparable
  */
 public abstract class Heap<T extends Comparable<T>> {
-    protected Array<T> heapArray;
+    protected final Array<T> heapArray;
     protected int size;
 
     /**
@@ -21,7 +21,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @param maxSize The maximum size of the heap.
      */
-    protected Heap(int maxSize) {
+    protected Heap(final int maxSize) {
         heapArray = new Array<>(maxSize);
         size = 0;
     }
@@ -31,7 +31,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @param element The element to be inserted into the heap.
      */
-    public abstract void insert(T element);
+    public abstract void insert(final T element);
 
     /**
      * Deletes the element at the top of the heap and returns it.
@@ -47,7 +47,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The index of the parent of the element.
      */
-    public int getParentIndex(int index) {
+    public int getParentIndex(final int index) {
         return (index - 1) / 2;
     }
 
@@ -58,7 +58,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The index of the left child of the element.
      */
-    public int getLeftChildIndex(int index) {
+    public int getLeftChildIndex(final int index) {
         return (2 * index) + 1;
     }
 
@@ -73,7 +73,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The index of the right child of the element.
      */
-    public int getRightChildIndex(int index) {
+    public int getRightChildIndex(final int index) {
         return (2 * index) + 2;
     }
 
@@ -84,7 +84,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return True if the element has a parent, false otherwise.
      */
-    public boolean hasParent(int index) {
+    public boolean hasParent(final int index) {
         return getParentIndex(index) >= 0;
     }
 
@@ -95,7 +95,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return True if the element has a left child, false otherwise.
      */
-    public boolean hasLeftChild(int index) {
+    public boolean hasLeftChild(final int index) {
         return getLeftChildIndex(index) < size;
     }
 
@@ -106,7 +106,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return True if the element has a right child, false otherwise.
      */
-    public boolean hasRightChild(int index) {
+    public boolean hasRightChild(final int index) {
         return getRightChildIndex(index) < size;
     }
 
@@ -117,7 +117,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The parent of the element.
      */
-    public T getParent(int index) {
+    public T getParent(final int index) {
         return heapArray.get(getParentIndex(index));
     }
 
@@ -128,7 +128,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The left child of the element.
      */
-    public T getLeftChild(int index) {
+    public T getLeftChild(final int index) {
         return heapArray.get(getLeftChildIndex(index));
     }
 
@@ -139,7 +139,7 @@ public abstract class Heap<T extends Comparable<T>> {
      *
      * @return The right child of the element.
      */
-    public T getRightChild(int index) {
+    public T getRightChild(final int index) {
         return heapArray.get(getRightChildIndex(index));
     }
 
@@ -149,7 +149,7 @@ public abstract class Heap<T extends Comparable<T>> {
      * @param index1 The index of the first element.
      * @param index2 The index of the second element.
      */
-    protected void swap(int index1, int index2) {
+    protected void swap(final int index1, final int index2) {
         T temp = heapArray.get(index1);
         heapArray.set(index1, heapArray.get(index2));
         heapArray.set(index2, temp);
@@ -169,7 +169,7 @@ public abstract class Heap<T extends Comparable<T>> {
         return sb.toString();
     }
 
-    private void buildHeapTree(int index, String prefix, boolean isTail, StringBuilder sb) {
+    private void buildHeapTree(final int index, final String prefix, final boolean isTail, final StringBuilder sb) {
         sb.append(prefix).append(isTail
                                  ? "└─ "
                                  : "├─ ").append(heapArray.get(index)).append("\n");

@@ -23,7 +23,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
      * @param left  the left subtree of the BinarySearchTree
      * @param right the right subtree of the BinarySearchTree
      */
-    public BinarySearchTree(E head, BinarySearchTree<E> left, BinarySearchTree<E> right) {
+    public BinarySearchTree(final E head, final BinarySearchTree<E> left, final BinarySearchTree<E> right) {
         super(head, left, right);
         this.head = head;
         this.left = left;
@@ -36,7 +36,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
      *
      * @param head the head element of the BinarySearchTree
      */
-    public BinarySearchTree(E head) {
+    public BinarySearchTree(final E head) {
         this(head, null, null);
     }
 
@@ -46,7 +46,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
      * @param element the element to add to the BinarySearchTree
      */
     @Override
-    public void add(E element) {
+    public void add(final E element) {
         if (head == null) {
             head = element;
             return;
@@ -70,17 +70,17 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
     }
 
     @Override
-    public void setHead(E head) {
+    public void setHead(final E head) {
         this.head = head;
     }
 
     @Override
-    public void setLeftTree(Tree<E> tree) {
+    public void setLeftTree(final Tree<E> tree) {
         this.left = (BinarySearchTree<E>) tree;
     }
 
     @Override
-    public void setRightTree(Tree<E> tree) {
+    public void setRightTree(final Tree<E> tree) {
         this.right = (BinarySearchTree<E>) tree;
     }
 

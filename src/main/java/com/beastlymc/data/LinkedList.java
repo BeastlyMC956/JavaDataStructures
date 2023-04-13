@@ -12,11 +12,11 @@ public class LinkedList<E> {
      *
      * @param <E> the same type of elements that is stored in the LinkedList.
      */
-    private static class Node<E> {
+    private static final class Node<E> {
         private E data;
         private Node<E> next;
 
-        private Node(E data) {
+        private Node(final E data) {
             this.data = data;
             this.next = null;
         }
@@ -54,7 +54,7 @@ public class LinkedList<E> {
      *
      * @param element the element to add to the LinkedList
      */
-    public void add(E element) {
+    public void add(final E element) {
         Node<E> newNode = new Node<>(element);
 
         if (isEmpty()) {
@@ -72,7 +72,7 @@ public class LinkedList<E> {
      *
      * @param element the element to add to the beginning of the LinkedList
      */
-    public void addFirst(E element) {
+    public void addFirst(final E element) {
         Node<E> newNode = new Node<>(element);
         newNode.next = head;
         head = newNode;
@@ -87,7 +87,7 @@ public class LinkedList<E> {
      *
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    public void set(int index, E element) {
+    public void set(final int index, final E element) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(index);
         }
@@ -105,7 +105,7 @@ public class LinkedList<E> {
      *
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    public void remove(int index) {
+    public void remove(final int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(index);
         }
@@ -130,7 +130,7 @@ public class LinkedList<E> {
      *
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    public E get(int index) {
+    public E get(final int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
@@ -140,7 +140,7 @@ public class LinkedList<E> {
             current = current.next;
         }
 
-        return current.data;
+            return current.data;
     }
 
     /**
@@ -150,7 +150,7 @@ public class LinkedList<E> {
      *
      * @return true if the LinkedList contains the specified element, false otherwise
      */
-    public boolean contains(E element) {
+    public boolean contains(final E element) {
         Node<E> current = head;
         while (current != null) {
             if (current.data.equals(element)) {

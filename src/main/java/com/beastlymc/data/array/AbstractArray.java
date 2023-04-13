@@ -3,7 +3,7 @@ package com.beastlymc.data.array;
 public abstract class AbstractArray<E> {
     private final int capacity;
 
-    protected AbstractArray(int capacity) {
+    protected AbstractArray(final int capacity) {
         this.capacity = capacity;
     }
 
@@ -34,7 +34,7 @@ public abstract class AbstractArray<E> {
      *
      * @throws IndexOutOfBoundsException If the index is out of bounds.
      */
-    public E get(int index) {
+    public E get(final int index) {
         if (index < 0 || index > getSize()) {
             throw new IndexOutOfBoundsException(index);
         }
@@ -48,7 +48,7 @@ public abstract class AbstractArray<E> {
      *
      * @return True if the array contains the element, false otherwise.
      */
-    public boolean contains(E element) {
+    public boolean contains(final E element) {
         for (int i = 0; i < getSize(); i++) {
             if (toArray()[i].equals(element)) {
                 return true;
@@ -65,7 +65,7 @@ public abstract class AbstractArray<E> {
      *
      * @return The index of the first occurrence of the element, or -1 if the element is not found.
      */
-    public int indexOf(E element) {
+    public int indexOf(final E element) {
         for (int i = 0; i < getSize(); i++) {
             if (toArray()[i].equals(element)) {
                 return i;
@@ -82,7 +82,7 @@ public abstract class AbstractArray<E> {
      *
      * @param element The element to be appended.
      */
-    public abstract void add(E element);
+    public abstract void add(final E element);
 
     /**
      * Sets the value of the element at the specified index.
@@ -92,14 +92,14 @@ public abstract class AbstractArray<E> {
      *
      * @throws IndexOutOfBoundsException If the index is out of bounds.
      */
-    public abstract E set(int index, E element);
+    public abstract E set(final int index, final E element);
 
     /**
      * Removes the first occurrence of the specified element from this array.
      *
      * @param element The element to remove.
      */
-    public abstract E removeElement(E element);
+    public abstract E removeElement(final E element);
 
     /**
      * Removes the element at the specified index from this array.
@@ -110,7 +110,7 @@ public abstract class AbstractArray<E> {
      *
      * @throws IndexOutOfBoundsException If the index is out of bounds.
      */
-    public abstract E remove(int index);
+    public abstract E remove(final int index);
 
     /**
      * Returns the number of elements currently stored in the array.

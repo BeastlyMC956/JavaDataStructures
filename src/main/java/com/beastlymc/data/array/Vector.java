@@ -12,7 +12,7 @@ public class Vector<E> extends AbstractArray<E> {
     private E[] arr;
     private int size;
 
-    public Vector(int capacity) {
+    public Vector(final int capacity) {
         super(capacity);
         size = 0;
         this.arr = (E[]) new Object[capacity];
@@ -35,7 +35,7 @@ public class Vector<E> extends AbstractArray<E> {
      * @param element The element to be appended.
      */
     @Override
-    public synchronized void add(E element) {
+    public synchronized void add(final E element) {
         if (size == arr.length) {
             resize(2 * arr.length);
         }
@@ -49,7 +49,7 @@ public class Vector<E> extends AbstractArray<E> {
      *
      * @param newCapacity The new capacity of the array.
      */
-    private synchronized void resize(int newCapacity) {
+    private synchronized void resize(final int newCapacity) {
         E[] newArray = (E[]) new Object[newCapacity];
 
         if (size >= 0) {
@@ -68,7 +68,7 @@ public class Vector<E> extends AbstractArray<E> {
      * @throws IndexOutOfBoundsException If the index is negative
      */
     @Override
-    public synchronized E set(int index, E element) {
+    public synchronized E set(final int index, final E element) {
         if (index < 0) {
             throw new IndexOutOfBoundsException(index);
         }
@@ -85,7 +85,7 @@ public class Vector<E> extends AbstractArray<E> {
     }
 
     @Override
-    public synchronized E removeElement(E element) {
+    public synchronized E removeElement(final E element) {
         int index = indexOf(element);
 
         if (index != -1) {
@@ -95,7 +95,7 @@ public class Vector<E> extends AbstractArray<E> {
     }
 
     @Override
-    public synchronized E remove(int index) {
+    public synchronized E remove(final int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(index);
         }

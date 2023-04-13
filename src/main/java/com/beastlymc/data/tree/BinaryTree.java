@@ -20,7 +20,7 @@ public class BinaryTree<E> extends AbstractBinaryTree<E> {
      * @param left  the left subtree of the BinaryTree
      * @param right the right subtree of the BinaryTree
      */
-    public BinaryTree(E head, BinaryTree<E> left, BinaryTree<E> right) {
+    public BinaryTree(final E head, final BinaryTree<E> left, final BinaryTree<E> right) {
         super(head, left, right);
         this.head = head;
         this.left = left;
@@ -32,7 +32,7 @@ public class BinaryTree<E> extends AbstractBinaryTree<E> {
      *
      * @param head the head element of the BinaryTree
      */
-    public BinaryTree(E head) {
+    public BinaryTree(final E head) {
         this(head, null, null);
     }
 
@@ -42,7 +42,7 @@ public class BinaryTree<E> extends AbstractBinaryTree<E> {
      * @param element the element to add to the BinaryTree
      */
     @Override
-    public void add(E element) {
+    public void add(final E element) {
         if (this.head == null) {
             this.head = element;
             return;
@@ -69,7 +69,7 @@ public class BinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     @Override
-    public void setHead(E head) {
+    public void setHead(final E head) {
         this.head = head;
     }
 
@@ -84,12 +84,12 @@ public class BinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     @Override
-    public void setLeftTree(Tree<E> tree) {
+    public void setLeftTree(final Tree<E> tree) {
         this.left = (BinaryTree<E>) tree;
     }
 
     @Override
-    public void setRightTree(Tree<E> tree) {
+    public void setRightTree(final Tree<E> tree) {
         this.right = (BinaryTree<E>) tree;
     }
 

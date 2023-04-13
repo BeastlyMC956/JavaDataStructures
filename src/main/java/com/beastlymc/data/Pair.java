@@ -18,7 +18,7 @@ public class Pair<K, V> {
      * @param leftSide  the value to use as the left-side value in the pair
      * @param rightSide the value to use as the right-side value in the pair
      */
-    public Pair(K leftSide, V rightSide) {
+    public Pair(final K leftSide, final V rightSide) {
         this.leftSide = leftSide;
         this.rightSide = rightSide;
     }
@@ -28,7 +28,7 @@ public class Pair<K, V> {
      *
      * @param leftSide the value to use as the left-side value in the pair
      */
-    public void setLeft(K leftSide) {
+    public void setLeft(final K leftSide) {
         this.leftSide = leftSide;
     }
 
@@ -37,7 +37,7 @@ public class Pair<K, V> {
      *
      * @param rightSide the value to use as the right-side value in the pair
      */
-    public void setRight(V rightSide) {
+    public void setRight(final V rightSide) {
         this.rightSide = rightSide;
     }
 

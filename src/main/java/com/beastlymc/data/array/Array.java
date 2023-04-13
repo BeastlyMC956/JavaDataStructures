@@ -11,7 +11,7 @@ public class Array<E> extends AbstractArray<E> {
     private final E[] arr;
     private int size;
 
-    public Array(int capacity) {
+    public Array(final int capacity) {
         super(capacity);
         size = 0;
         arr = (E[]) new Object[capacity];
@@ -40,7 +40,7 @@ public class Array<E> extends AbstractArray<E> {
     }
 
     @Override
-    public E set(int index, E element) {
+    public E set(final int index, final E element) {
         if (index < 0 || index >= getCapacity()) {
             throw new IndexOutOfBoundsException(index);
         }
@@ -54,7 +54,7 @@ public class Array<E> extends AbstractArray<E> {
     }
 
     @Override
-    public E removeElement(E element) {
+    public E removeElement(final E element) {
         int index = indexOf(element);
 
         if (index != -1) {
@@ -64,7 +64,7 @@ public class Array<E> extends AbstractArray<E> {
     }
 
     @Override
-    public E remove(int index) {
+    public E remove(final int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(index);
         }

@@ -42,7 +42,7 @@ public class Queue<E> {
      *
      * @param element the element to add to the Queue
      */
-    public void offer(E element) {
+    public void offer(final E element) {
         list.add(element);
     }
 

@@ -16,7 +16,7 @@ public interface Tree<E> {
      *
      * @param element the element to add to the tree.
      */
-    void add(E element);
+    void add(final E element);
 
     boolean isEmpty();
 
@@ -29,14 +29,14 @@ public interface Tree<E> {
      */
     int getHeight();
 
-    void setHead(E head);
+    void setHead(final E head);
 
     /**
      * Sets the left subtree of the tree to the specified tree.
      *
      * @param tree the tree to set as the left subtree
      */
-    void setLeftTree(Tree<E> tree);
+    void setLeftTree(final Tree<E> tree);
 
     /**
      * Sets the right subtree of the tree to the specified tree.
@@ -44,7 +44,7 @@ public interface Tree<E> {
      * @param tree the tree to set as the right subtree
      */
 
-    void setRightTree(Tree<E> tree);
+    void setRightTree(final Tree<E> tree);
 
     /**
      * Returns the element at the head of the tree.

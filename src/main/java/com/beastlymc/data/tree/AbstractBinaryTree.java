@@ -7,9 +7,9 @@ package com.beastlymc.data.tree;
  */
 public abstract class AbstractBinaryTree<E> implements Tree<E> {
 
-    private E head;
-    private AbstractBinaryTree<E> left;
-    private AbstractBinaryTree<E> right;
+    private final E head;
+    private final AbstractBinaryTree<E> left;
+    private final AbstractBinaryTree<E> right;
 
     /**
      * Constructs a binary tree with the specified head, left subtree, and right subtree.
@@ -18,7 +18,7 @@ public abstract class AbstractBinaryTree<E> implements Tree<E> {
      * @param left  the left subtree of the binary tree
      * @param right the right subtree of the binary tree
      */
-    protected AbstractBinaryTree(E head, AbstractBinaryTree<E> left, AbstractBinaryTree<E> right) {
+    protected AbstractBinaryTree(final E head, final AbstractBinaryTree<E> left, final AbstractBinaryTree<E> right) {
         this.head = head;
         this.left = left;
         this.right = right;

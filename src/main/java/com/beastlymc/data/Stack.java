@@ -16,7 +16,7 @@ public class Stack<E> {
      *
      * @param capacity the maximum number of elements the Stack can hold
      */
-    public Stack(int capacity) {
+    public Stack(final int capacity) {
         top = -1;
         data = new Array<>(capacity);
     }
@@ -42,7 +42,7 @@ public class Stack<E> {
      *
      * @throws IllegalStateException if the Stack is full
      */
-    public void push(E value) {
+    public void push(final E value) {
         if (isFull()) {
             throw new IllegalStateException("Stack is full");
         }
