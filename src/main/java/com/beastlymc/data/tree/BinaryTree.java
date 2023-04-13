@@ -1,4 +1,6 @@
-package com.beastlymc.data;
+package com.beastlymc.data.tree;
+
+import com.beastlymc.data.Queue;
 
 /**
  * The BinaryTree class is a concrete implementation of the AbstractBinaryTree class that represents a binary tree data structure with elements of type E.
@@ -64,6 +66,36 @@ public class BinaryTree<E> extends AbstractBinaryTree<E> {
                 }
             }
         }
+    }
+
+    @Override
+    public void setHead(E head) {
+        this.head = head;
+    }
+
+    @Override
+    public Tree<E> getLeftTree() {
+        return left;
+    }
+
+    @Override
+    public Tree<E> getRightTree() {
+        return right;
+    }
+
+    @Override
+    public void setLeftTree(Tree<E> tree) {
+        this.left = (BinaryTree<E>) tree;
+    }
+
+    @Override
+    public void setRightTree(Tree<E> tree) {
+        this.right = (BinaryTree<E>) tree;
+    }
+
+    @Override
+    public E getHead() {
+        return head;
     }
 
     /**

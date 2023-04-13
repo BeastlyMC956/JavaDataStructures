@@ -1,4 +1,4 @@
-package com.beastlymc.data;
+package com.beastlymc.data.tree;
 
 /**
  * The AbstractBinaryTree class provides an abstract implementation of the Tree interface and represents a binary tree data structure with elements of type E.
@@ -7,7 +7,7 @@ package com.beastlymc.data;
  */
 public abstract class AbstractBinaryTree<E> implements Tree<E> {
 
-    private final E head;
+    private E head;
     private AbstractBinaryTree<E> left;
     private AbstractBinaryTree<E> right;
 
@@ -24,66 +24,27 @@ public abstract class AbstractBinaryTree<E> implements Tree<E> {
         this.right = right;
     }
 
+    @Override
+    public boolean isEmpty() {
+        return head == null && left == null && right == null;
+    }
+
     /**
      * @return the height of the binary tree
      */
     @Override
     public int getHeight() {
-        if (head == null) {
+        if (getHead() == null) {
             return 0;
         }
 
-        int leftHeight = (left == null)
+        int leftHeight = (getLeftTree() == null)
                          ? 0
-                         : left.getHeight();
-        int rightHeight = (right == null)
+                         : getLeftTree().getHeight();
+        int rightHeight = (getRightTree() == null)
                           ? 0
-                          : right.getHeight();
+                          : getRightTree().getHeight();
         return 1 + Math.max(leftHeight, rightHeight);
-    }
-
-    /**
-     * @return the head element of the binary tree
-     */
-    @Override
-    public E getHead() {
-        return head;
-    }
-
-    /**
-     * Sets the left subtree of the binary tree.
-     *
-     * @param tree the left subtree of the binary tree
-     */
-    @Override
-    public void setLeftTree(Tree<E> tree) {
-        this.left = (BinaryTree<E>) tree;
-    }
-
-    /**
-     * Sets the right subtree of the binary tree.
-     *
-     * @param tree the right subtree of the binary tree
-     */
-    @Override
-    public void setRightTree(Tree<E> binaryTree) {
-        this.right = (BinaryTree<E>) binaryTree;
-    }
-
-    /**
-     * @return the left subtree of the binary tree
-     */
-    @Override
-    public Tree<E> getLeftTree() {
-        return left;
-    }
-
-    /**
-     * @return the right subtree of the binary tree
-     */
-    @Override
-    public Tree<E> getRightTree() {
-        return right;
     }
 
     /**

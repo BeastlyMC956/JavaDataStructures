@@ -4,7 +4,7 @@ This is a small library of Java data structures that includes the following data
 ## Data Structures
 
 ### ``Array<E>``
-This is a dynamic array implementation in Java that resizes itself automatically when necessary. 
+This is an array implementation in Java with a fixed size.
 The type of elements stored in the array is denoted by ``<E>``.
 
 ### ``BinarySearchTree<E>``
@@ -33,3 +33,8 @@ The type of elements stored in the ``Queue`` is denoted by ``<E>``.
 ### ``Stack<E>``
 This represents a Last-In-First-Out (LIFO) stack data structure that stores elements of type ``E``. 
 The type of elements stored in the ``Stack`` is denoted by ``<E>``.
+
+### ``Vector<E>``
+This represents a generic ``Array`` that stores elements of type ``E``, is thread safe and 
+automatically resizes itself when it is out of space. 
+The type of elements stored in the ``Vector`` is represented by ``<E>``

@@ -1,4 +1,4 @@
-package com.beastlymc.data;
+package com.beastlymc.data.tree;
 
 /**
  * This interface represents a Tree that stores elements of type E.
@@ -18,6 +18,8 @@ public interface Tree<E> {
      */
     void add(E element);
 
+    boolean isEmpty();
+
     /**
      * Returns the height of the tree.
      * The height of the tree is defined as the number of levels in the tree.
@@ -27,13 +29,7 @@ public interface Tree<E> {
      */
     int getHeight();
 
-    /**
-     * Returns the element at the head of the tree.
-     * The head of the tree is the root node of the tree.
-     *
-     * @return the element at the head of the tree.
-     */
-    E getHead();
+    void setHead(E head);
 
     /**
      * Sets the left subtree of the tree to the specified tree.
@@ -49,6 +45,14 @@ public interface Tree<E> {
      */
 
     void setRightTree(Tree<E> tree);
+
+    /**
+     * Returns the element at the head of the tree.
+     * The head of the tree is the root node of the tree.
+     *
+     * @return the element at the head of the tree.
+     */
+    E getHead();
 
     /**
      * @return the left subtree of the tree

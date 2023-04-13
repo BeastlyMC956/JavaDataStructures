@@ -1,4 +1,4 @@
-package com.beastlymc.data;
+package com.beastlymc.data.tree;
 
 /**
  * The BinarySearchTree class represents a binary search tree data structure that stores elements of type E in sorted order.
@@ -7,6 +7,7 @@ package com.beastlymc.data;
  *
  * @param <E> the type of elements stored in the BinarySearchTree.
  *
+ * @see Tree
  * @see Comparable
  */
 public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
@@ -66,5 +67,35 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
                 right.add(element);
             }
         }
+    }
+
+    @Override
+    public void setHead(E head) {
+        this.head = head;
+    }
+
+    @Override
+    public void setLeftTree(Tree<E> tree) {
+        this.left = (BinarySearchTree<E>) tree;
+    }
+
+    @Override
+    public void setRightTree(Tree<E> tree) {
+        this.right = (BinarySearchTree<E>) tree;
+    }
+
+    @Override
+    public Tree<E> getLeftTree() {
+        return left;
+    }
+
+    @Override
+    public Tree<E> getRightTree() {
+        return right;
+    }
+
+    @Override
+    public E getHead() {
+        return head;
     }
 }

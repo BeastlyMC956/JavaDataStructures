@@ -1,5 +1,7 @@
 package com.beastlymc.data;
 
+import com.beastlymc.data.array.Array;
+
 /**
  * The Stack class represents a Last-In-First-Out (LIFO) stack data structure that stores elements of type E.
  *
@@ -45,7 +47,7 @@ public class Stack<E> {
             throw new IllegalStateException("Stack is full");
         }
         top++;
-        data.addLast(value);
+        data.add(value);
     }
 
     /**

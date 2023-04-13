@@ -1,5 +1,7 @@
 package com.beastlymc.data;
 
+import com.beastlymc.data.tree.AbstractBinaryTree;
+import com.beastlymc.data.tree.BinarySearchTree;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
