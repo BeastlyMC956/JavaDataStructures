@@ -5,121 +5,129 @@ import com.beastlymc.data.Queue;
 /**
  * The BinaryTree class is a concrete implementation of the AbstractBinaryTree class that represents a binary tree data structure with elements of type E.
  *
- * @param <E> the type of elements stored in the BinaryTree.
+ * @param <T> the type of elements stored in the BinaryTree.
  */
-public class BinaryTree<E> extends AbstractBinaryTree<E> {
-
-    private E head;
-    private BinaryTree<E> left;
-    private BinaryTree<E> right;
-
-    /**
-     * Constructs a new BinaryTree with the specified head element, left subtree, and right subtree.
-     *
-     * @param head  the head element of the BinaryTree
-     * @param left  the left subtree of the BinaryTree
-     * @param right the right subtree of the BinaryTree
-     */
-    public BinaryTree(final E head, final BinaryTree<E> left, final BinaryTree<E> right) {
-        super(head, left, right);
-        this.head = head;
-        this.left = left;
-        this.right = right;
+public class BinaryTree<T> extends AbstractBinaryTree<T> {
+    public BinaryTree() {
+        super();
     }
 
-    /**
-     * Constructs a new BinaryTree with the specified head element and empty subtrees.
-     *
-     * @param head the head element of the BinaryTree
-     */
-    public BinaryTree(final E head) {
-        this(head, null, null);
-    }
-
-    /**
-     * Adds the specified element to the BinaryTree.
-     *
-     * @param element the element to add to the BinaryTree
-     */
     @Override
-    public void add(final E element) {
-        if (this.head == null) {
-            this.head = element;
+    public void insert(final T data) {
+        Node<T> newNode = new Node<>(data);
+
+        if (root == null) {
+            root = newNode;
             return;
         }
 
-        if (left == null) {
-            left = new BinaryTree<>(element);
-        } else if (right == null) {
-            right = new BinaryTree<>(element);
-        } else {
-            Queue<BinaryTree<E>> leftQueue = new Queue<>();
-            Queue<BinaryTree<E>> rightQueue = new Queue<>();
-            leftQueue.offer(left);
-            rightQueue.offer(right);
-            while (!leftQueue.isEmpty() || !rightQueue.isEmpty()) {
-                if (checkTree(element, leftQueue)) {
-                    return;
-                }
-                if (checkTree(element, rightQueue)) {
-                    return;
-                }
-            }
-        }
-    }
+        Queue<Node<T>> queue = new Queue<>();
+        queue.offer(root);
 
-    @Override
-    public void setHead(final E head) {
-        this.head = head;
-    }
+        while (!queue.isEmpty()) {
+            Node<T> currentNode = queue.poll();
 
-    @Override
-    public Tree<E> getLeftTree() {
-        return left;
-    }
-
-    @Override
-    public Tree<E> getRightTree() {
-        return right;
-    }
-
-    @Override
-    public void setLeftTree(final Tree<E> tree) {
-        this.left = (BinaryTree<E>) tree;
-    }
-
-    @Override
-    public void setRightTree(final Tree<E> tree) {
-        this.right = (BinaryTree<E>) tree;
-    }
-
-    @Override
-    public E getHead() {
-        return head;
-    }
-
-    /**
-     * Helper method to check the BinaryTree for a spot to add the specified element.
-     *
-     * @param element the element to add to the BinaryTree
-     * @param queue   the queue of BinaryTrees to check
-     *
-     * @return true if the element was added to the BinaryTree, false otherwise
-     */
-    private boolean checkTree(E element, Queue<BinaryTree<E>> queue) {
-        if (!queue.isEmpty()) {
-            BinaryTree<E> current = queue.poll();
-            if (current.getLeftTree() == null) {
-                current.setLeftTree(new BinaryTree<>(element));
-                return true;
-            } else if (current.getRightTree() == null) {
-                current.setRightTree(new BinaryTree<>(element));
-                return true;
+            if (currentNode.leftChild == null) {
+                currentNode.leftChild = newNode;
+                return;
             } else {
-                queue.offer((BinaryTree<E>) current.getLeftTree());
-                queue.offer((BinaryTree<E>) current.getRightTree());
+                queue.offer(currentNode.leftChild);
+            }
+
+            if (currentNode.rightChild == null) {
+                currentNode.rightChild = newNode;
+                return;
+            } else {
+                queue.offer(currentNode.rightChild);
             }
         }
+    }
+
+    @Override
+    public boolean search(final T data) {
+        if (root == null) {
+            return false;
+        }
+
+        Queue<Node<T>> queue = new Queue<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            Node<T> currentNode = queue.poll();
+
+            if (currentNode.data.equals(data)) {
+                return true;
+            }
+
+            if (currentNode.leftChild != null) {
+                queue.offer(currentNode.leftChild);
+            }
+
+            if (currentNode.rightChild != null) {
+                queue.offer(currentNode.rightChild);
+            }
+        }
+
         return false;
+    }
+
+    @Override
+    public void delete(final T data) {
+        if (root == null) {
+            return;
+        }
+
+        Queue<Node<T>> queue = new Queue<>();
+        queue.offer(root);
+
+        Node<T> nodeToDelete = null;
+        Node<T> deepestNode = null;
+
+        while (!queue.isEmpty()) {
+            Node<T> currentNode = queue.poll();
+
+            if (currentNode.data.equals(data)) {
+                nodeToDelete = currentNode;
+            }
+
+            if (currentNode.leftChild != null) {
+                queue.offer(currentNode.leftChild);
+                deepestNode = currentNode.leftChild;
+            }
+
+            if (currentNode.rightChild != null) {
+                queue.offer(currentNode.rightChild);
+                deepestNode = currentNode.rightChild;
+            }
+        }
+
+        if (nodeToDelete != null) {
+            nodeToDelete.data = deepestNode.data;
+
+            queue.clear();
+            queue.offer(root);
+
+            while (!queue.isEmpty()) {
+                Node<T> currentNode = queue.poll();
+
+                if (currentNode.leftChild != null) {
+                    if (currentNode.leftChild == deepestNode) {
+                        currentNode.leftChild = null;
+                        return;
+                    } else {
+                        queue.offer(currentNode.leftChild);
+                    }
+                }
+
+                if (currentNode.rightChild != null) {
+                    if (currentNode.rightChild == deepestNode) {
+                        currentNode.rightChild = null;
+                        return;
+                    } else {
+                        queue.offer(currentNode.rightChild);
+                    }
+                }
+            }
+        }
     }
 }

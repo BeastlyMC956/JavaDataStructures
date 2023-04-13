@@ -34,6 +34,14 @@ public class Queue<E> {
         return list.get(0);
     }
 
+    public void clear() {
+        list.clear();
+    }
+
+    public int size() {
+        return list.getSize();
+    }
+
 
     /**
      * Adds the specified element to the back of the Queue.

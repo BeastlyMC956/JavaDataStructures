@@ -143,6 +143,16 @@ public class LinkedList<E> {
             return current.data;
     }
 
+    public void clear() {
+        if(getSize() == 0) {
+            return;
+        }
+
+        for (int i = 0; i < getSize(); i++) {
+            remove(i);
+        }
+    }
+
     /**
      * Returns true if the LinkedList contains the specified element, false otherwise.
      *

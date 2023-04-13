@@ -1,81 +1,147 @@
 package com.beastlymc.data.tree;
 
+import com.beastlymc.data.Queue;
+
 /**
- * The AbstractBinaryTree class provides an abstract implementation of the Tree interface and represents a binary tree data structure with elements of type E.
+ * An abstract class representing a binary tree data structure.
  *
- * @param <E> the type of elements stored in the BinaryTree.
+ * @param <T> the type of elements stored in the binary tree
  */
-public abstract class AbstractBinaryTree<E> implements Tree<E> {
-
-    private final E head;
-    private final AbstractBinaryTree<E> left;
-    private final AbstractBinaryTree<E> right;
+public abstract class AbstractBinaryTree<T> {
 
     /**
-     * Constructs a binary tree with the specified head, left subtree, and right subtree.
+     * The root node of the binary tree.
+     */
+    protected Node<T> root;
+
+    /**
+     * Initializes an empty binary tree.
+     */
+    protected AbstractBinaryTree() {
+        this.root = null;
+    }
+
+    /**
+     * Inserts a new element into the binary tree.
      *
-     * @param head  the head element of the binary tree
-     * @param left  the left subtree of the binary tree
-     * @param right the right subtree of the binary tree
+     * @param data the element to insert
      */
-    protected AbstractBinaryTree(final E head, final AbstractBinaryTree<E> left, final AbstractBinaryTree<E> right) {
-        this.head = head;
-        this.left = left;
-        this.right = right;
-    }
+    public abstract void insert(final T data);
 
-    @Override
+    /**
+     * Searches for an element in the binary tree.
+     *
+     * @param data the element to search for
+     *
+     * @return true if the element is found, false otherwise
+     */
+    public abstract boolean search(final T data);
+
+    /**
+     * Deletes an element from the binary tree.
+     *
+     * @param data the element to delete
+     */
+    public abstract void delete(final T data);
+
+    /**
+     * Checks whether the tree is empty
+     * @return true if the tree is empty, false otherwise
+     */
     public boolean isEmpty() {
-        return head == null && left == null && right == null;
+        return root == null;
     }
 
     /**
-     * @return the height of the binary tree
-     */
-    @Override
-    public int getHeight() {
-        if (getHead() == null) {
-            return 0;
-        }
-
-        int leftHeight = (getLeftTree() == null)
-                         ? 0
-                         : getLeftTree().getHeight();
-        int rightHeight = (getRightTree() == null)
-                          ? 0
-                          : getRightTree().getHeight();
-        return 1 + Math.max(leftHeight, rightHeight);
-    }
-
-    /**
+     * Returns a string representation of the binary tree.
+     *
      * @return a string representation of the binary tree
      */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        toStringHelper(sb, "", "", this);
+
+        if (root == null) {
+            return sb.toString();
+        }
+
+        Queue<Node<T>> queue = new Queue<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+
+            for (int i = 0; i < levelSize; i++) {
+                Node<T> currentNode = queue.poll();
+
+                if (currentNode == null) {
+                    sb.append("  ");
+                } else {
+                    sb.append(currentNode.data.toString()).append(" ");
+
+                    queue.offer(currentNode.leftChild);
+                    queue.offer(currentNode.rightChild);
+                }
+            }
+
+            sb.append("\n");
+        }
+
+        String[] lines = sb.toString().split("\n");
+        int maxWidth = lines[lines.length - 2].length();
+        sb = new StringBuilder();
+
+        for (String line : lines) {
+            sb.append(padLine(line, maxWidth)).append("\n");
+        }
+
         return sb.toString();
     }
 
-    /**
-     * Helper method for generating the string representation of the binary tree.
-     *
-     * @param sb             the StringBuilder object to append the tree nodes to
-     * @param prefix         the prefix string for the current node
-     * @param childrenPrefix the prefix string for the current node's children
-     * @param node           the current node to append to the StringBuilder
-     */
-    private void toStringHelper(StringBuilder sb, String prefix, String childrenPrefix, AbstractBinaryTree<E> node) {
-        sb.append(prefix);
-        sb.append(node.getHead());
-        sb.append("\n");
-        if (node.getLeftTree() != null) {
-            toStringHelper(sb, childrenPrefix + "├── ", childrenPrefix + "│   ",
-                           (AbstractBinaryTree<E>) node.getLeftTree());
+    private String padLine(String line, int maxWidth) {
+        int lineLength = line.length();
+
+        if (lineLength < maxWidth) {
+            int diff = maxWidth - lineLength;
+            int leftPadding = diff / 2;
+            int rightPadding = diff - leftPadding;
+            return " ".repeat(leftPadding) + line + " ".repeat(rightPadding);
+        } else {
+            return line;
         }
-        if (node.getRightTree() != null) {
-            toStringHelper(sb, childrenPrefix + "└── ", childrenPrefix + "    ",
-                           (AbstractBinaryTree<E>) node.getRightTree());
+    }
+
+    /**
+     * A nested class representing a node in the binary tree.
+     *
+     * @param <T> the type of element stored in the node
+     */
+    protected static class Node<T> {
+
+        /**
+         * The element stored in the node.
+         */
+        protected T data;
+
+        /**
+         * The left child node of the node.
+         */
+        protected Node<T> leftChild;
+
+        /**
+         * The right child node of the node.
+         */
+        protected Node<T> rightChild;
+
+        /**
+         * Initializes a new node with the specified element.
+         *
+         * @param data the element to store in the node
+         */
+        public Node(T data) {
+            this.data = data;
+            this.leftChild = null;
+            this.rightChild = null;
         }
     }
 }

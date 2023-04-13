@@ -1,101 +1,136 @@
 package com.beastlymc.data.tree;
 
 /**
- * The BinarySearchTree class represents a binary search tree data structure that stores elements of type E in sorted order.
- * <p>
- * The elements must implement the Comparable interface in order to be stored in the BinarySearchTree.
+ * A class representing a binary search tree data structure.
  *
- * @param <E> the type of elements stored in the BinarySearchTree.
+ * @param <T> the type of elements stored in the binary search tree
  *
- * @see Tree
  * @see Comparable
  */
-public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
-
-    private E head;
-    private BinarySearchTree<E> left;
-    private BinarySearchTree<E> right;
+public class BinarySearchTree<T extends Comparable<T>> extends AbstractBinaryTree<T> {
 
     /**
-     * Constructs a new BinarySearchTree with the specified head element, left subtree, and right subtree.
-     *
-     * @param head  the head element of the BinarySearchTree
-     * @param left  the left subtree of the BinarySearchTree
-     * @param right the right subtree of the BinarySearchTree
+     * Initializes an empty binary search tree.
      */
-    public BinarySearchTree(final E head, final BinarySearchTree<E> left, final BinarySearchTree<E> right) {
-        super(head, left, right);
-        this.head = head;
-        this.left = left;
-        this.right = right;
-    }
-
-
-    /**
-     * Constructs a new BinarySearchTree with the specified head element and empty subtrees.
-     *
-     * @param head the head element of the BinarySearchTree
-     */
-    public BinarySearchTree(final E head) {
-        this(head, null, null);
+    public BinarySearchTree() {
+        super();
     }
 
     /**
-     * Adds the specified element to the BinarySearchTree in sorted order.
+     * Inserts a new element into the binary search tree.
      *
-     * @param element the element to add to the BinarySearchTree
+     * @param data the element to insert
      */
     @Override
-    public void add(final E element) {
-        if (head == null) {
-            head = element;
+    public void insert(final T data) {
+        Node<T> newNode = new Node<>(data);
+
+        if (root == null) {
+            root = newNode;
             return;
         }
 
-        int comparison = element.compareTo(head);
+        Node<T> currentNode = root;
 
-        if (comparison < 0) {
-            if (left == null) {
-                left = new BinarySearchTree<>(element);
+        while (true) {
+            if (data.compareTo(currentNode.data) < 0) {
+                if (currentNode.leftChild == null) {
+                    currentNode.leftChild = newNode;
+                    return;
+                } else {
+                    currentNode = currentNode.leftChild;
+                }
             } else {
-                left.add(element);
-            }
-        } else if (comparison > 0) {
-            if (right == null) {
-                right = new BinarySearchTree<>(element);
-            } else {
-                right.add(element);
+                if (currentNode.rightChild == null) {
+                    currentNode.rightChild = newNode;
+                    return;
+                } else {
+                    currentNode = currentNode.rightChild;
+                }
             }
         }
     }
 
+    /**
+     * Searches for an element in the binary search tree.
+     *
+     * @param data the element to search for
+     *
+     * @return true if the element is found, false otherwise
+     */
     @Override
-    public void setHead(final E head) {
-        this.head = head;
+    public boolean search(final T data) {
+        Node<T> currentNode = root;
+
+        while (currentNode != null) {
+            if (data.compareTo(currentNode.data) < 0) {
+                currentNode = currentNode.leftChild;
+            } else if (data.compareTo(currentNode.data) > 0) {
+                currentNode = currentNode.rightChild;
+            } else {
+                return true;
+            }
+        }
+
+        return false;
     }
 
+    /**
+     * Deletes an element from the binary search tree.
+     *
+     * @param data the element to delete
+     */
     @Override
-    public void setLeftTree(final Tree<E> tree) {
-        this.left = (BinarySearchTree<E>) tree;
+    public void delete(final T data) {
+        root = delete(root, data);
     }
 
-    @Override
-    public void setRightTree(final Tree<E> tree) {
-        this.right = (BinarySearchTree<E>) tree;
+    /**
+     * Deletes a node with the specified element from the binary search tree rooted at the specified node.
+     *
+     * @param node the root node of the binary search tree to delete from
+     * @param data the element to delete
+     *
+     * @return the root node of the modified binary search tree
+     */
+    private Node<T> delete(Node<T> node, final T data) {
+        if (node == null) {
+            return null;
+        }
+
+        if (data.compareTo(node.data) < 0) {
+            node.leftChild = delete(node.leftChild, data);
+        } else if (data.compareTo(node.data) > 0) {
+            node.rightChild = delete(node.rightChild, data);
+        } else {
+            if (node.leftChild == null && node.rightChild == null) {
+                node = null;
+            } else if (node.leftChild == null) {
+                node = node.rightChild;
+            } else if (node.rightChild == null) {
+                node = node.leftChild;
+            } else {
+                Node<T> minRightNode = findMin(node.rightChild);
+                node.data = minRightNode.data;
+                node.rightChild = delete(node.rightChild, minRightNode.data);
+            }
+        }
+
+        return node;
     }
 
-    @Override
-    public Tree<E> getLeftTree() {
-        return left;
-    }
+    /**
+     * Finds the node with the minimum value in the binary search tree rooted at the specified node.
+     *
+     * @param node the root node of the binary search tree to search in
+     *
+     * @return the node with the minimum value in the binary search tree
+     */
+    private Node<T> findMin(Node<T> node) {
+        while (node.leftChild != null) {
+            node = node.leftChild;
+        }
 
-    @Override
-    public Tree<E> getRightTree() {
-        return right;
-    }
-
-    @Override
-    public E getHead() {
-        return head;
+        return node;
     }
 }

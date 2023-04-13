@@ -2,31 +2,123 @@ package com.beastlymc.data.tree;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryTreeTest {
 
     @Test
-    void testBinaryTreeOperations() {
-        AbstractBinaryTree<Integer> empty = new BinaryTree<>(null);
-        assertEquals(0, empty.getHeight());
+    void testAbstractBinaryTreeInsert() {
+        AbstractBinaryTree<Integer> tree = new BinaryTree<>();
+        assertTrue(tree.isEmpty());
+        tree.insert(1);
+        tree.insert(2);
+        tree.insert(3);
 
-        AbstractBinaryTree<Integer> tree = new BinaryTree<>(1);
+        assertFalse(tree.isEmpty());
 
-        tree.add(2);
-        tree.add(3);
+        assertEquals("""
+                              1 \s
+                             2 3\s
+                                    \s
+                             """, tree.toString());
 
-        assertEquals(1, tree.getHead());
-        assertEquals(2, tree.getLeftTree().getHead());
-        assertEquals(3, tree.getRightTree().getHead());
+        assertTrue(tree.search(1));
+        assertTrue(tree.search(2));
+        assertTrue(tree.search(3));
+    }
 
-        tree.add(4);
-        tree.add(5);
+    @Test
+    void testAbstractBinaryTreeSearch() {
+        AbstractBinaryTree<Integer> tree = new BinaryTree<>();
+        tree.insert(1);
+        tree.insert(2);
+        tree.insert(3);
+        assertTrue(tree.search(1));
+        assertTrue(tree.search(2));
+        assertTrue(tree.search(3));
+        assertFalse(tree.search(4));
+    }
 
-        assertEquals(4, tree.getLeftTree().getLeftTree().getHead());
-        assertEquals(5, tree.getLeftTree().getRightTree().getHead());
+    @Test
+    void testAbstractBinaryTreeDelete() {
+        AbstractBinaryTree<Integer> tree = new BinaryTree<>();
+        tree.insert(1);
+        tree.insert(2);
+        tree.insert(3);
+        tree.delete(2);
+        assertTrue(tree.search(1));
+        assertFalse(tree.search(2));
+        assertTrue(tree.search(3));
+    }
 
-        assertEquals(3, tree.getHeight());
+    @Test
+    void testBinaryTreeInsert() {
+        BinaryTree<Integer> tree = new BinaryTree<>();
+        tree.insert(1);
+        tree.insert(2);
+        tree.insert(3);
+        assertTrue(tree.search(1));
+        assertTrue(tree.search(2));
+        assertTrue(tree.search(3));
+    }
+
+    @Test
+    void testBinaryTreeSearch() {
+        BinaryTree<Integer> tree = new BinaryTree<>();
+        tree.insert(1);
+        tree.insert(2);
+        tree.insert(3);
+        assertTrue(tree.search(1));
+        assertTrue(tree.search(2));
+        assertTrue(tree.search(3));
+        assertFalse(tree.search(4));
+    }
+
+    @Test
+    void testBinaryTreeDelete() {
+        BinaryTree<Integer> tree = new BinaryTree<>();
+        tree.insert(1);
+        tree.insert(2);
+        tree.insert(3);
+        tree.delete(2);
+        assertTrue(tree.search(1));
+        assertFalse(tree.search(2));
+        assertTrue(tree.search(3));
+    }
+
+    @Test
+    void testBinarySearchTreeInsert() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.insert(2);
+        tree.insert(1);
+        tree.insert(3);
+        assertTrue(tree.search(1));
+        assertTrue(tree.search(2));
+        assertTrue(tree.search(3));
+    }
+
+    @Test
+    void testBinarySearchTreeSearch() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.insert(2);
+        tree.insert(1);
+        tree.insert(3);
+        assertTrue(tree.search(1));
+        assertTrue(tree.search(2));
+        assertTrue(tree.search(3));
+        assertFalse(tree.search(4));
+    }
+
+    @Test
+    void testBinarySearchTreeDelete() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.insert(2);
+        tree.insert(1);
+        tree.insert(3);
+        tree.delete(2);
+        assertTrue(tree.search(1));
+        assertFalse(tree.search(2));
+        assertTrue(tree.search(3));
     }
 
 }
