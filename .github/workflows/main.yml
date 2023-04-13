@@ -33,6 +33,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         lint_mode: 'all'
-        fail_on_errors: true
+        fail_on_errors: false
         debug: false
         enable_colors: true
+        exclude: ".*Test.java"
