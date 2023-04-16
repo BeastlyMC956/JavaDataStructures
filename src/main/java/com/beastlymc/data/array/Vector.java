@@ -1,7 +1,8 @@
 package com.beastlymc.data.array;
 
 /**
- * A resizable array implementation of a vector that can hold elements of any type.
+ * A resizable array implementation of a vector that can hold elements of any
+ * type.
  *
  * @param <E> the type of elements in the vector
  *
@@ -29,8 +30,7 @@ public class Vector<E> extends AbstractArray<E> {
     }
 
     /**
-     * Appends the specified element in this array.
-     * Resizes the Array as needed
+     * Appends the specified element in this array. Resizes the Array as needed
      *
      * @param element The element to be appended.
      */
@@ -123,7 +123,7 @@ public class Vector<E> extends AbstractArray<E> {
 
     @Override
     public synchronized void clear() {
-        if(getSize() == 0) {
+        if (getSize() == 0) {
             return;
         }
 

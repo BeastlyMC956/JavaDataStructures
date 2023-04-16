@@ -3,7 +3,8 @@ package com.beastlymc.data;
 import com.beastlymc.data.array.Array;
 
 /**
- * The Stack class represents a Last-In-First-Out (LIFO) stack data structure that stores elements of type E.
+ * The Stack class represents a Last-In-First-Out (LIFO) stack data structure
+ * that stores elements of type E.
  *
  * @param <E> the type of elements stored in the Stack.
  */

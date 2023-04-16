@@ -86,7 +86,8 @@ public class BinarySearchTree<T extends Comparable<T>> extends AbstractBinaryTre
     }
 
     /**
-     * Deletes a node with the specified element from the binary search tree rooted at the specified node.
+     * Deletes a node with the specified element from the binary search tree
+     * rooted at the specified node.
      *
      * @param node the root node of the binary search tree to delete from
      * @param data the element to delete
@@ -120,7 +121,8 @@ public class BinarySearchTree<T extends Comparable<T>> extends AbstractBinaryTre
     }
 
     /**
-     * Finds the node with the minimum value in the binary search tree rooted at the specified node.
+     * Finds the node with the minimum value in the binary search tree rooted at
+     * the specified node.
      *
      * @param node the root node of the binary search tree to search in
      *

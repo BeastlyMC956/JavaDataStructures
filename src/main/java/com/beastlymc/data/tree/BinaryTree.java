@@ -3,7 +3,8 @@ package com.beastlymc.data.tree;
 import com.beastlymc.data.Queue;
 
 /**
- * The BinaryTree class is a concrete implementation of the AbstractBinaryTree class that represents a binary tree data structure with elements of type E.
+ * The BinaryTree class is a concrete implementation of the AbstractBinaryTree
+ * class that represents a binary tree data structure with elements of type E.
  *
  * @param <T> the type of elements stored in the BinaryTree.
  */

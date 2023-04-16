@@ -8,8 +8,6 @@ public abstract class AbstractArray<E> {
     }
 
     /**
-     * Returns the current capacity of the array.
-     *
      * @return The current capacity of the array.
      */
     public int getCapacity() {
@@ -35,7 +33,7 @@ public abstract class AbstractArray<E> {
      * @throws IndexOutOfBoundsException If the index is out of bounds.
      */
     public E get(final int index) {
-        if (index < 0 || index > getSize()) {
+        if (index < 0 || index > getCapacity()) {
             throw new IndexOutOfBoundsException(index);
         }
         return toArray()[index];
@@ -59,11 +57,13 @@ public abstract class AbstractArray<E> {
     }
 
     /**
-     * Returns the index of the first occurrence of the specified element in this array, or -1 if the array does not contain the element.
+     * Returns the index of the first occurrence of the specified element in
+     * this array, or -1 if the array does not contain the element.
      *
      * @param element The element to search for.
      *
-     * @return The index of the first occurrence of the element, or -1 if the element is not found.
+     * @return The index of the first occurrence of the element, or -1 if the
+     * element is not found.
      */
     public int indexOf(final E element) {
         for (int i = 0; i < getSize(); i++) {
@@ -131,7 +131,8 @@ public abstract class AbstractArray<E> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format("Array size = %d, capacity = %d%n", getSize(), toArray().length));
+        sb.append(String.format("Array size = %d, capacity = %d%n", getSize(),
+                                toArray().length));
         sb.append("[");
 
         for (int i = 0; i < getSize(); i++) {

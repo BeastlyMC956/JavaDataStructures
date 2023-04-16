@@ -1,14 +1,16 @@
 package com.beastlymc.data;
 
 /**
- * The LinkedList class represents a linked list data structure that stores elements of type E.
+ * The LinkedList class represents a linked list data structure that stores
+ * elements of type E.
  *
  * @param <E> the type of elements stored in the LinkedList.
  */
 public class LinkedList<E> {
 
     /**
-     * The Node class represents a node in the LinkedList, storing an element of type E and a reference to the next node.
+     * The Node class represents a node in the LinkedList, storing an element of
+     * type E and a reference to the next node.
      *
      * @param <E> the same type of elements that is stored in the LinkedList.
      */
@@ -140,11 +142,11 @@ public class LinkedList<E> {
             current = current.next;
         }
 
-            return current.data;
+        return current.data;
     }
 
     public void clear() {
-        if(getSize() == 0) {
+        if (getSize() == 0) {
             return;
         }
 
@@ -154,11 +156,13 @@ public class LinkedList<E> {
     }
 
     /**
-     * Returns true if the LinkedList contains the specified element, false otherwise.
+     * Returns true if the LinkedList contains the specified element, false
+     * otherwise.
      *
      * @param element the element to search for in the LinkedList
      *
-     * @return true if the LinkedList contains the specified element, false otherwise
+     * @return true if the LinkedList contains the specified element, false
+     * otherwise
      */
     public boolean contains(final E element) {
         Node<E> current = head;

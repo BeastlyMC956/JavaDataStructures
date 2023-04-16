@@ -3,12 +3,15 @@ package com.beastlymc.data.tree.heap;
 import com.beastlymc.data.array.Array;
 
 /**
- * Heap class represents an abstract heap data structure where elements are sorted in a particular order.
+ * Heap class represents an abstract heap data structure where elements are
+ * sorted in a particular order.
  * <p>
- * The class provides abstract methods to insert and delete elements from the heap. It also provides utility
- * methods to access and manipulate the elements in the heap.
+ * The class provides abstract methods to insert and delete elements from the
+ * heap. It also provides utility methods to access and manipulate the elements
+ * in the heap.
  *
- * @param <T> The type of elements stored in the heap. The elements must be comparable with each other.
+ * @param <T> The type of elements stored in the heap. The elements must be
+ *            comparable with each other.
  *
  * @see Comparable
  */
@@ -52,7 +55,8 @@ public abstract class Heap<T extends Comparable<T>> {
     }
 
     /**
-     * Returns the index of the left child of the element at the specified index.
+     * Returns the index of the left child of the element at the specified
+     * index.
      *
      * @param index The index of the element.
      *
@@ -67,7 +71,8 @@ public abstract class Heap<T extends Comparable<T>> {
     }
 
     /**
-     * Returns the index of the right child of the element at the specified index.
+     * Returns the index of the right child of the element at the specified
+     * index.
      *
      * @param index The index of the element.
      *
@@ -172,16 +177,19 @@ public abstract class Heap<T extends Comparable<T>> {
     private void buildHeapTree(final int index, final String prefix, final boolean isTail, final StringBuilder sb) {
         sb.append(prefix).append(isTail
                                  ? "└─ "
-                                 : "├─ ").append(heapArray.get(index)).append("\n");
+                                 : "├─ ").append(heapArray.get(index))
+                .append("\n");
         if (hasLeftChild(index)) {
             buildHeapTree(getLeftChildIndex(index), prefix + (isTail
                                                               ? "    "
-                                                              : "│   "), !hasRightChild(index), sb);
+                                                              : "│   "),
+                          !hasRightChild(index), sb);
         }
         if (hasRightChild(index)) {
             buildHeapTree(getRightChildIndex(index), prefix + (isTail
                                                                ? "    "
-                                                               : "│   "), true, sb);
+                                                               : "│   "), true,
+                          sb);
         }
     }
 }

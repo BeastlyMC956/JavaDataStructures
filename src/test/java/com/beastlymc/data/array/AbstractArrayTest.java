@@ -144,7 +144,8 @@ class AbstractArrayTest {
         assertEquals(100, vector.get(5));
 
         assertThrows(IndexOutOfBoundsException.class, () -> array.set(5, 999));
-        assertThrows(IndexOutOfBoundsException.class, () -> vector.set(-1, 999));
+        assertThrows(IndexOutOfBoundsException.class,
+                     () -> vector.set(-1, 999));
 
         restartVector();
         restartArray();
@@ -161,8 +162,10 @@ class AbstractArrayTest {
         testCapacityAndSize(vector, 4, 5);
         testCapacityAndSize(array, 3, 5);
 
-        assertThrows(IllegalArgumentException.class, () -> array.removeElement(5));
-        assertThrows(IllegalArgumentException.class, () -> vector.removeElement(20));
+        assertThrows(IllegalArgumentException.class,
+                     () -> array.removeElement(5));
+        assertThrows(IllegalArgumentException.class,
+                     () -> vector.removeElement(20));
 
         restartVector();
         restartArray();

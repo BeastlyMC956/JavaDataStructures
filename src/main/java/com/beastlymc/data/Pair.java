@@ -3,7 +3,8 @@ package com.beastlymc.data;
 import java.util.Objects;
 
 /**
- * A generic class that represents a pair of two values, one of type K and the other of type V.
+ * A generic class that represents a pair of two values, one of type K and the
+ * other of type V.
  *
  * @param <K> the type of the left-side value in the pair
  * @param <V> the type of the right-side value in the pair
@@ -82,7 +83,8 @@ public class Pair<K, V> {
             return false;
         }
         Pair<?, ?> pair = (Pair<?, ?>) o;
-        return Objects.equals(leftSide, pair.leftSide) && Objects.equals(rightSide, pair.rightSide);
+        return Objects.equals(leftSide, pair.leftSide) &&
+               Objects.equals(rightSide, pair.rightSide);
     }
 
     /**

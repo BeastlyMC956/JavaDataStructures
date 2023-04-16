@@ -1,7 +1,8 @@
 package com.beastlymc.data.array;
 
 /**
- * An implementation of the {@link AbstractArray} class that uses a plain fixed array to store elements.
+ * An implementation of the {@link AbstractArray} class that uses a plain fixed
+ * array to store elements.
  *
  * @param <E> the type of elements stored in the array.
  */
@@ -13,7 +14,8 @@ public class Array<E> extends AbstractArray<E> {
     private final E[] arr;
 
     /**
-     * The current size of this instance, i.e. the number of elements it contains.
+     * The current size of this instance, i.e. the number of elements it
+     * contains.
      */
     private int size;
 
@@ -29,7 +31,8 @@ public class Array<E> extends AbstractArray<E> {
     }
 
     /**
-     * Returns an array containing all the elements in this instance in proper sequence.
+     * Returns an array containing all the elements in this instance in proper
+     * sequence.
      *
      * @return an array containing all the elements in this instance.
      */
@@ -56,14 +59,16 @@ public class Array<E> extends AbstractArray<E> {
     }
 
     /**
-     * Replaces the element at the specified position in this instance with the specified element.
+     * Replaces the element at the specified position in this instance with the
+     * specified element.
      *
      * @param index   the index of the element to replace.
      * @param element the element to be stored at the specified position.
      *
      * @return the element previously at the specified position.
      *
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= capacity).
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0
+     *                                   || index >= capacity).
      */
     @Override
     public E set(final int index, final E element) {
@@ -80,7 +85,8 @@ public class Array<E> extends AbstractArray<E> {
     }
 
     /**
-     * Removes the first occurrence of the specified element from this instance, if it is present.
+     * Removes the first occurrence of the specified element from this instance,
+     * if it is present.
      *
      * @param element the element to be removed from this instance, if present.
      *
@@ -105,7 +111,8 @@ public class Array<E> extends AbstractArray<E> {
      *
      * @return the element previously at the specified position.
      *
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size).
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0
+     *                                   || index >= size).
      */
     @Override
     public E remove(final int index) {

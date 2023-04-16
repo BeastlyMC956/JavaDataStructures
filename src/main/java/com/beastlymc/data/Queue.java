@@ -1,7 +1,8 @@
 package com.beastlymc.data;
 
 /**
- * The Queue class represents a First-In-First-Out (FIFO) queue data structure that stores elements of type E.
+ * The Queue class represents a First-In-First-Out (FIFO) queue data structure
+ * that stores elements of type E.
  *
  * @param <E> the type of elements stored in the Queue.
  */
@@ -25,7 +26,8 @@ public class Queue<E> {
     /**
      * Returns the element at the front of the Queue without removing it.
      *
-     * @return the element at the front of the Queue, or null if the Queue is empty
+     * @return the element at the front of the Queue, or null if the Queue is
+     * empty
      */
     public E peek() {
         if (list.isEmpty()) {
@@ -57,7 +59,8 @@ public class Queue<E> {
     /**
      * Removes and returns the element at the front of the Queue.
      *
-     * @return the element at the front of the Queue, or null if the Queue is empty
+     * @return the element at the front of the Queue, or null if the Queue is
+     * empty
      */
     public E poll() {
         if (list.isEmpty()) {
