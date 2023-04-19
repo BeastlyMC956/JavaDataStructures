@@ -66,9 +66,6 @@ public abstract class Heap<T extends Comparable<T>> {
         return (2 * index) + 1;
     }
 
-    public int getSize() {
-        return size;
-    }
 
     /**
      * Returns the index of the right child of the element at the specified
@@ -80,6 +77,14 @@ public abstract class Heap<T extends Comparable<T>> {
      */
     public int getRightChildIndex(final int index) {
         return (2 * index) + 2;
+    }
+
+
+    /**
+     * @return the size of the {@link Heap}
+     */
+    public int getSize() {
+        return size;
     }
 
     /**

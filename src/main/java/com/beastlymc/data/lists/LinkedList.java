@@ -145,6 +145,9 @@ public class LinkedList<E> {
         return current.data;
     }
 
+    /**
+     * Clears all elements from this linked list.
+     */
     public void clear() {
         if (getSize() == 0) {
             return;
