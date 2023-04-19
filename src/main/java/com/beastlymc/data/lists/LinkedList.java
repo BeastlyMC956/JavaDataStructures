@@ -1,4 +1,4 @@
-package com.beastlymc.data;
+package com.beastlymc.data.lists;
 
 /**
  * The LinkedList class represents a linked list data structure that stores
@@ -145,6 +145,9 @@ public class LinkedList<E> {
         return current.data;
     }
 
+    /**
+     * Clears all elements from this linked list.
+     */
     public void clear() {
         if (getSize() == 0) {
             return;

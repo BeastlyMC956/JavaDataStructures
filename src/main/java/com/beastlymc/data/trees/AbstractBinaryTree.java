@@ -1,6 +1,6 @@
-package com.beastlymc.data.tree;
+package com.beastlymc.data.trees;
 
-import com.beastlymc.data.Queue;
+import com.beastlymc.data.queues.Queue;
 
 /**
  * An abstract class representing a binary tree data structure.
@@ -46,6 +46,7 @@ public abstract class AbstractBinaryTree<T> {
 
     /**
      * Checks whether the tree is empty
+     *
      * @return true if the tree is empty, false otherwise
      */
     public boolean isEmpty() {

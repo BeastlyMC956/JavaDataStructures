@@ -1,4 +1,4 @@
-package com.beastlymc.data.tree;
+package com.beastlymc.data.trees;
 
 import org.junit.jupiter.api.Test;
 

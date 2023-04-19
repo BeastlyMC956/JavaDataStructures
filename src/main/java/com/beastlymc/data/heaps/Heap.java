@@ -1,6 +1,6 @@
-package com.beastlymc.data.tree.heap;
+package com.beastlymc.data.heaps;
 
-import com.beastlymc.data.array.Array;
+import com.beastlymc.data.arrays.Array;
 
 /**
  * Heap class represents an abstract heap data structure where elements are
@@ -66,9 +66,6 @@ public abstract class Heap<T extends Comparable<T>> {
         return (2 * index) + 1;
     }
 
-    public int getSize() {
-        return size;
-    }
 
     /**
      * Returns the index of the right child of the element at the specified
@@ -80,6 +77,14 @@ public abstract class Heap<T extends Comparable<T>> {
      */
     public int getRightChildIndex(final int index) {
         return (2 * index) + 2;
+    }
+
+
+    /**
+     * @return the size of the {@link Heap}
+     */
+    public int getSize() {
+        return size;
     }
 
     /**

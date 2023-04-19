@@ -1,4 +1,6 @@
-package com.beastlymc.data;
+package com.beastlymc.data.queues;
+
+import com.beastlymc.data.lists.LinkedList;
 
 /**
  * The Queue class represents a First-In-First-Out (FIFO) queue data structure

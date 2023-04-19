@@ -1,4 +1,4 @@
-package com.beastlymc.data;
+package com.beastlymc.data.queues;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.beastlymc.data.array;
+package com.beastlymc.data.arrays;
 
 /**
  * A resizable array implementation of a vector that can hold elements of any
@@ -6,7 +6,7 @@ package com.beastlymc.data.array;
  *
  * @param <E> the type of elements in the vector
  *
- * @see com.beastlymc.data.array.AbstractArray
+ * @see AbstractArray
  */
 public class Vector<E> extends AbstractArray<E> {
 

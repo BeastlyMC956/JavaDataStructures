@@ -1,4 +1,4 @@
-package com.beastlymc.data.array;
+package com.beastlymc.data.arrays;
 
 import org.junit.jupiter.api.Test;
 

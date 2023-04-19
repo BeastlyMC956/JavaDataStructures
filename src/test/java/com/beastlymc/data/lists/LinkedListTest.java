@@ -1,4 +1,4 @@
-package com.beastlymc.data;
+package com.beastlymc.data.lists;
 
 import org.junit.jupiter.api.Test;
 

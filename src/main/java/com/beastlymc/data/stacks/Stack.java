@@ -1,6 +1,6 @@
-package com.beastlymc.data;
+package com.beastlymc.data.stacks;
 
-import com.beastlymc.data.array.Array;
+import com.beastlymc.data.arrays.Array;
 
 /**
  * The Stack class represents a Last-In-First-Out (LIFO) stack data structure
