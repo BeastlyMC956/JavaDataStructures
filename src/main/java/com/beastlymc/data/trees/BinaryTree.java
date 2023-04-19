@@ -1,6 +1,6 @@
-package com.beastlymc.data.tree;
+package com.beastlymc.data.trees;
 
-import com.beastlymc.data.Queue;
+import com.beastlymc.data.queues.Queue;
 
 /**
  * The BinaryTree class is a concrete implementation of the AbstractBinaryTree

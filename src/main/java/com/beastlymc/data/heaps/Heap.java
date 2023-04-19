@@ -1,6 +1,6 @@
-package com.beastlymc.data.tree.heap;
+package com.beastlymc.data.heaps;
 
-import com.beastlymc.data.array.Array;
+import com.beastlymc.data.arrays.Array;
 
 /**
  * Heap class represents an abstract heap data structure where elements are

@@ -1,6 +1,6 @@
-package com.beastlymc.data;
+package com.beastlymc.data.hash;
 
-import com.beastlymc.data.array.Array;
+import com.beastlymc.data.arrays.Array;
 
 /**
  * This class implements a hash table that can store any type of value.

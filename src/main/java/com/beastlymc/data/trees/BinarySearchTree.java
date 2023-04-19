@@ -1,4 +1,4 @@
-package com.beastlymc.data.tree;
+package com.beastlymc.data.trees;
 
 /**
  * A class representing a binary search tree data structure.

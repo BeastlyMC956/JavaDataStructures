@@ -1,4 +1,4 @@
-package com.beastlymc.data;
+package com.beastlymc.data.lists;
 
 /**
  * The LinkedList class represents a linked list data structure that stores

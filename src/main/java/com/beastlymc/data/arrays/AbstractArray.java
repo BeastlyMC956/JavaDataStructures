@@ -1,4 +1,4 @@
-package com.beastlymc.data.array;
+package com.beastlymc.data.arrays;
 
 public abstract class AbstractArray<E> {
     private final int capacity;

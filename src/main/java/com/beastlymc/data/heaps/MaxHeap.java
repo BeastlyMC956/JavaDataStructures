@@ -1,14 +1,17 @@
-package com.beastlymc.data.tree.heap;
+package com.beastlymc.data.heaps;
 
 /**
- * MaxHeap class represents a max heap data structure where the maximum element is always at the top.
+ * MaxHeap class represents a max heap data structure where the maximum element
+ * is always at the top.
  * <p>
- * The class extends the abstract Heap class and provides implementations for its abstract methods.
+ * The class extends the abstract Heap class and provides implementations for
+ * its abstract methods.
  *
- * @param <T> The type of elements stored in the heap. The elements must be comparable with each other.
+ * @param <T> The type of elements stored in the heap. The elements must be
+ *            comparable with each other.
  *
  * @see Comparable
- * @see com.beastlymc.data.tree.heap.Heap
+ * @see Heap
  */
 public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
 
@@ -22,7 +25,8 @@ public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
     }
 
     /**
-     * Inserts the specified element into the heap and maintains the max-heap property.
+     * Inserts the specified element into the heap and maintains the max-heap
+     * property.
      *
      * @param element The element to be inserted into the heap.
      *
@@ -39,7 +43,8 @@ public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
     }
 
     /**
-     * Deletes the top element from the max heap and maintains the max-heap property.
+     * Deletes the top element from the max heap and maintains the max-heap
+     * property.
      *
      * @return The maximum element in the heap.
      *
@@ -64,23 +69,27 @@ public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
      * @param index The index of the element to be moved.
      */
     private void heapifyUp(int index) {
-        while (hasParent(index) && getParent(index).compareTo(heapArray.get(index)) < 0) {
+        while (hasParent(index) &&
+               getParent(index).compareTo(heapArray.get(index)) < 0) {
             swap(getParentIndex(index), index);
             index = getParentIndex(index);
         }
     }
 
     /**
-     * A helper method to move the element at the root of the heap down until the max-heap property is satisfied
+     * A helper method to move the element at the root of the heap down until
+     * the max-heap property is satisfied
      */
     private void heapifyDown() {
         int index = 0;
         while (hasLeftChild(index)) {
             int largerChildIndex = getLeftChildIndex(index);
-            if (hasRightChild(index) && getRightChild(index).compareTo(getLeftChild(index)) > 0) {
+            if (hasRightChild(index) &&
+                getRightChild(index).compareTo(getLeftChild(index)) > 0) {
                 largerChildIndex = getRightChildIndex(index);
             }
-            if (heapArray.get(index).compareTo(heapArray.get(largerChildIndex)) > 0) {
+            if (heapArray.get(index)
+                        .compareTo(heapArray.get(largerChildIndex)) > 0) {
                 break;
             } else {
                 swap(index, largerChildIndex);

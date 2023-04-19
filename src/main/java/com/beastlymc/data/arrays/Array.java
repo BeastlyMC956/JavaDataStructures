@@ -1,4 +1,4 @@
-package com.beastlymc.data.array;
+package com.beastlymc.data.arrays;
 
 /**
  * An implementation of the {@link AbstractArray} class that uses a plain fixed
