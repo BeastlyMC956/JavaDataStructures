@@ -1,12 +1,18 @@
 package com.beastlymc.data.lists;
 
+import com.beastlymc.data.common.Insertable;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 /**
  * The LinkedList class represents a linked list data structure that stores
  * elements of type E.
  *
  * @param <E> the type of elements stored in the LinkedList.
  */
-public class LinkedList<E> {
+public class LinkedList<E> implements Insertable<E> {
 
     /**
      * The Node class represents a node in the LinkedList, storing an element of
@@ -37,18 +43,9 @@ public class LinkedList<E> {
         this.size = 0;
     }
 
-    /**
-     * @return the size of the LinkedList
-     */
-    public int getSize() {
+    @Override
+    public int size() {
         return size;
-    }
-
-    /**
-     * @return true if the LinkedList is empty, false otherwise
-     */
-    public boolean isEmpty() {
-        return size == 0;
     }
 
     /**
@@ -56,7 +53,8 @@ public class LinkedList<E> {
      *
      * @param element the element to add to the LinkedList
      */
-    public void add(final E element) {
+    @Override
+    public void append(final E element) {
         Node<E> newNode = new Node<>(element);
 
         if (isEmpty()) {
@@ -66,7 +64,6 @@ public class LinkedList<E> {
         }
         tail = newNode;
         size++;
-
     }
 
     /**
@@ -81,15 +78,8 @@ public class LinkedList<E> {
         size++;
     }
 
-    /**
-     * Sets the element at the specified index to the specified element.
-     *
-     * @param index   the index of the element to set
-     * @param element the element to set at the specified index
-     *
-     * @throws IndexOutOfBoundsException if the index is out of range
-     */
-    public void set(final int index, final E element) {
+    @Override
+    public void insert(final int index, final E element) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(index);
         }
@@ -100,27 +90,38 @@ public class LinkedList<E> {
         current.data = element;
     }
 
-    /**
-     * Removes the element at the specified index from the LinkedList.
-     *
-     * @param index the index of the element to remove
-     *
-     * @throws IndexOutOfBoundsException if the index is out of range
-     */
-    public void remove(final int index) {
+    @Override
+    public Optional<E> remove(final E element) {
+        Node<E> current = head;
+        for (int i = 0; i < size - 1; i++) {
+            if (current.data.equals(element)) {
+                return removeAt(i);
+            }
+            current = current.next;
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<E> removeAt(final int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(index);
         }
+
+        Optional<E> returnNode;
         if (index == 0) {
+            returnNode = Optional.of(head.data);
             head = head.next;
         } else {
             Node<E> current = head;
             for (int i = 0; i < index - 1; i++) {
                 current = current.next;
             }
+            returnNode = Optional.of(current.next.data);
             current.next = current.next.next;
         }
         size--;
+        return returnNode;
     }
 
     /**
@@ -148,13 +149,14 @@ public class LinkedList<E> {
     /**
      * Clears all elements from this linked list.
      */
+    @Override
     public void clear() {
-        if (getSize() == 0) {
+        if (size() == 0) {
             return;
         }
 
-        for (int i = 0; i < getSize(); i++) {
-            remove(i);
+        for (int i = 0; i < size(); i++) {
+            removeAt(i);
         }
     }
 
@@ -167,6 +169,7 @@ public class LinkedList<E> {
      * @return true if the LinkedList contains the specified element, false
      * otherwise
      */
+    @Override
     public boolean contains(final E element) {
         Node<E> current = head;
         while (current != null) {
@@ -176,6 +179,11 @@ public class LinkedList<E> {
             current = current.next;
         }
         return false;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new LinkedListIterator<>(head);
     }
 
     /**
@@ -195,5 +203,34 @@ public class LinkedList<E> {
         }
         builder.append("]");
         return builder.toString();
+    }
+
+    private static class LinkedListIterator<E> implements Iterator<E> {
+
+        private Node<E> current;
+
+        public LinkedListIterator(Node<E> head) {
+            current = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            E data = current.data;
+            current = current.next;
+            return data;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }

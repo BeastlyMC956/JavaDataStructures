@@ -25,6 +25,13 @@ public class Pair<K, V> {
     }
 
     /**
+     * Constructor for an empty Pair.
+     */
+    public Pair() {
+        this(null, null);
+    }
+
+    /**
      * Sets the value of the left-side value in the pair.
      *
      * @param leftSide the value to use as the left-side value in the pair
