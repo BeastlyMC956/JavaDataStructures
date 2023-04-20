@@ -1,72 +1,134 @@
 package com.beastlymc.data.arrays;
 
-public abstract class AbstractArray<E> {
-    private final int capacity;
+import com.beastlymc.data.common.Insertable;
 
+import java.util.Optional;
+
+/**
+ * The AbstractArray class is an abstract base class that implements the
+ * {@link Insertable} interface. It provides a basic implementation of an array
+ * that can be inserted, removed, and queried. The class is parameterized over a
+ * type E, which represents the type of elements stored in the array.
+ */
+public abstract class AbstractArray<E> implements Insertable<E> {
+
+    /**
+     * The array of elements
+     */
+    protected E[] array;
+
+    /**
+     * Constructs a new AbstractArray object with the specified capacity.
+     *
+     * @param capacity the capacity of the array
+     */
     protected AbstractArray(final int capacity) {
-        this.capacity = capacity;
+        array = (E[]) new Object[capacity];
     }
 
     /**
-     * @return The current capacity of the array.
+     * Returns the element at the specified index in the array.
+     *
+     * @param index the index of the element to return
+     *
+     * @return the element at the specified index
+     *
+     * @throws IndexOutOfBoundsException if the index is out of range
      */
-    public int getCapacity() {
-        return capacity;
-    }
-
-    /**
-     * Checks if the array is empty.
-     *
-     * @return True if the array is empty, false otherwise.
-     */
-    public boolean isEmpty() {
-        return getSize() == 0;
-    }
-
-    /**
-     * Gets the element at the specified index.
-     *
-     * @param index The index of the element to get.
-     *
-     * @return The element at the specified index.
-     *
-     * @throws IndexOutOfBoundsException If the index is out of bounds.
-     */
-    public E get(final int index) {
-        if (index < 0 || index > getCapacity()) {
+    public E get(int index) {
+        if (index < 0 || index >= toArray().length) {
             throw new IndexOutOfBoundsException(index);
         }
-        return toArray()[index];
+
+        return array[index];
     }
 
     /**
-     * Checks if the array contains the specified element.
+     * Removes the first occurrence of the specified element from the array.
      *
-     * @param element The element to check for.
+     * @param element the element to be removed from the array
      *
-     * @return True if the array contains the element, false otherwise.
+     * @return an {@link Optional} containing the removed element, or an empty
+     * Optional if the element was not found
      */
+    @Override
+    public Optional<E> remove(final E element) {
+        if (indexOf(element) == -1) {
+            return Optional.empty();
+        }
+
+        return removeAt(indexOf(element));
+    }
+
+    /**
+     * Removes the element at the specified index from the array.
+     *
+     * @param index the index of the element to be removed from the array
+     *
+     * @return an {@link Optional} containing the removed element, or an empty
+     * Optional if the element was not found
+     *
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
+    @Override
+    public Optional<E> removeAt(final int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= array.length) {
+            throw new IndexOutOfBoundsException(index);
+        }
+
+        if (array[index] == null) {
+            return Optional.empty();
+        }
+
+        E element = array[index];
+        array[index] = null;
+
+        return Optional.of(element);
+    }
+
+    /**
+     * @return the length of the array
+     */
+    public int length() {
+        return array.length;
+    }
+
+    /**
+     * Returns true if the array contains the specified element, false
+     * otherwise.
+     *
+     * @param element the element to be searched for in the array
+     *
+     * @return true if the array contains the specified element, false otherwise
+     */
+    @Override
     public boolean contains(final E element) {
-        for (int i = 0; i < getSize(); i++) {
-            if (toArray()[i].equals(element)) {
+        for (E ele : toArray()) {
+            if (ele == null) {
+                continue;
+            }
+            if (ele.equals(element)) {
                 return true;
             }
         }
-
         return false;
     }
 
     /**
-     * Returns the index of the first occurrence of the specified element in
-     * this array, or -1 if the array does not contain the element.
+     * Returns the index of the first occurrence of the specified element in the
+     * array.
      *
-     * @param element The element to search for.
+     * @param element the element to be searched for in the array
      *
-     * @return The index of the first occurrence of the element, or -1 if the
-     * element is not found.
+     * @return the index of the first occurrence of the specified element in the
+     * array, or -1 if the element was not found
      */
     public int indexOf(final E element) {
-        for (int i = 0; i < getSize(); i++) {
+        if (!contains(element)) {
+            return -1;
+        }
+
+        for (int i = 0; i < array.length; i++) {
             if (toArray()[i].equals(element)) {
                 return i;
             }
@@ -75,76 +137,31 @@ public abstract class AbstractArray<E> {
         return -1;
     }
 
+    /**
+     * @return an array containing all the elements in the array
+     */
     public abstract E[] toArray();
 
     /**
-     * Appends the specified element in this array.
-     *
-     * @param element The element to be appended.
-     */
-    public abstract void add(final E element);
-
-    /**
-     * Sets the value of the element at the specified index.
-     *
-     * @param index   The index of the element to set.
-     * @param element The new element to be inserted.
-     *
-     * @throws IndexOutOfBoundsException If the index is out of bounds.
-     */
-    public abstract E set(final int index, final E element);
-
-    /**
-     * Removes the first occurrence of the specified element from this array.
-     *
-     * @param element The element to remove.
-     */
-    public abstract E removeElement(final E element);
-
-    /**
-     * Removes the element at the specified index from this array.
-     *
-     * @param index The index of the element to be removed.
-     *
-     * @return The element that was removed from the array.
-     *
-     * @throws IndexOutOfBoundsException If the index is out of bounds.
-     */
-    public abstract E remove(final int index);
-
-    /**
-     * Returns the number of elements currently stored in the array.
-     *
-     * @return The number of elements in the array.
-     */
-    public abstract int getSize();
-
-    /**
-     * Clears all elements from this array.
-     */
-    public abstract void clear();
-
-    /**
-     * @return A string representation of this array.
+     * @return a string representation of the array
      */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format("Array size = %d, capacity = %d%n", getSize(),
-                                toArray().length));
         sb.append("[");
-
-        for (int i = 0; i < getSize(); i++) {
-            sb.append(toArray()[i]);
-
-            if (i != getSize() - 1) {
-                sb.append(", ");
+        int index = 0;
+        for (E element : toArray()) {
+            if (element != null) {
+                if (index == array.length - 1) {
+                    return sb.append(element).append("]").toString();
+                }
+                sb.append(element).append(",");
             }
+            index++;
         }
 
         sb.append("]");
-
         return sb.toString();
     }
 }

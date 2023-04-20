@@ -34,10 +34,10 @@ public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
      */
     @Override
     public void insert(final T element) {
-        if (size == heapArray.getCapacity()) {
+        if (size == heapArray.length()) {
             throw new IllegalStateException("Heap is full");
         }
-        heapArray.set(size, element);
+        heapArray.insert(size, element);
         heapifyUp(size);
         size++;
     }
@@ -56,7 +56,7 @@ public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
             throw new IllegalStateException("Heap is empty");
         }
         T deletedElement = heapArray.get(0);
-        heapArray.set(0, heapArray.get(size - 1));
+        heapArray.insert(0, heapArray.get(size - 1));
         size--;
         heapifyDown();
         return deletedElement;

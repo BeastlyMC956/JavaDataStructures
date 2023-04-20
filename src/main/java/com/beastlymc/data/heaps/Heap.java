@@ -161,8 +161,8 @@ public abstract class Heap<T extends Comparable<T>> {
      */
     protected void swap(final int index1, final int index2) {
         T temp = heapArray.get(index1);
-        heapArray.set(index1, heapArray.get(index2));
-        heapArray.set(index2, temp);
+        heapArray.insert(index1, heapArray.get(index2));
+        heapArray.insert(index2, temp);
     }
 
     /**

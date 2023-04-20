@@ -33,7 +33,7 @@ public class Stack<E> {
      * @return true if the Stack is full, false otherwise
      */
     public boolean isFull() {
-        return top == data.getCapacity() - 1;
+        return top == data.length() - 1;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Stack<E> {
             throw new IllegalStateException("Stack is full");
         }
         top++;
-        data.add(value);
+        data.append(value);
     }
 
     /**

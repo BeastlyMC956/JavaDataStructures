@@ -1,46 +1,48 @@
 package com.beastlymc.data.arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AbstractArrayTest {
 
-    private static Vector<Integer> vector = new Vector<>(5);
-    private static Array<Integer> array = new Array<>(5);
+    private static AbstractArray<Integer> vector = new Vector<>(5);
+    private static AbstractArray<Integer> array = new Array<>(5);
 
-    private static void restartVector() {
+    @BeforeEach
+    void init() {
         vector = new Vector<>(5);
-        vector.add(1);
-        vector.add(2);
-        vector.add(3);
-        vector.add(4);
-        vector.add(5);
-    }
-
-    private static void restartArray() {
         array = new Array<>(5);
-        array.add(1);
-        array.add(2);
-        array.add(3);
-        array.add(4);
+
+        array.append(1);
+        array.append(2);
+        array.append(3);
+        array.append(4);
+
+        vector.append(1);
+        vector.append(2);
+        vector.append(3);
+        vector.append(4);
+        vector.append(5);
     }
 
-    private void testCapacityAndSize(AbstractArray<Integer> abstractArray, int size, int capacity) {
-        assertEquals(capacity, abstractArray.getCapacity());
-        assertEquals(size, abstractArray.getSize());
-    }
-
-    static {
-        restartArray();
-        restartVector();
+    private void testCapacityAndSize(final AbstractArray<Integer> abstractArray, final int size, final int capacity) {
+        assertEquals(capacity, abstractArray.length());
+        assertEquals(size, abstractArray.size());
     }
 
     @Test
     void isEmpty() {
-        Array<Integer> emptyArray = new Array<>(5);
+        AbstractArray<Integer> emptyArray = new Array<>(5);
+        AbstractArray<Integer> emptyVector = new Vector<>(5);
 
         assertTrue(emptyArray.isEmpty());
+        assertTrue(emptyVector.isEmpty());
+        assertEquals(-1, emptyArray.indexOf(20));
+        assertEquals(-1, emptyVector.indexOf(20));
     }
 
     @Test
@@ -50,13 +52,28 @@ class AbstractArrayTest {
     }
 
     @Test
+    void testIterator() {
+        int index = 0;
+        for (Integer ints : array) {
+            assertEquals(ints, array.get(index));
+            index++;
+        }
+
+        index = 0;
+        for (Integer ints : vector) {
+            assertEquals(ints, vector.get(index));
+            index++;
+        }
+    }
+
+    @Test
     void stringTest() {
         Vector<Integer> newVector = new Vector<>(5);
-        newVector.add(1);
-        newVector.add(2);
-        newVector.add(3);
-        newVector.add(4);
-        newVector.add(5);
+        newVector.append(1);
+        newVector.append(2);
+        newVector.append(3);
+        newVector.append(4);
+        newVector.append(5);
         assertEquals(newVector.toString(), vector.toString());
     }
 
@@ -78,9 +95,6 @@ class AbstractArrayTest {
 
         testCapacityAndSize(array, 0, 5);
         testCapacityAndSize(vector, 0, 5);
-
-        restartArray();
-        restartVector();
     }
 
     @Test
@@ -92,12 +106,12 @@ class AbstractArrayTest {
         ints[3] = 4;
 
         assertArrayEquals(ints, array.toArray());
-        assertEquals(ints.length, array.getCapacity());
+        assertEquals(ints.length, array.length());
 
         ints[4] = 5;
 
         assertArrayEquals(ints, vector.toArray());
-        assertEquals(ints.length, vector.getCapacity());
+        assertEquals(ints.length, vector.length());
     }
 
     @Test
@@ -105,50 +119,38 @@ class AbstractArrayTest {
         testCapacityAndSize(vector, 5, 5);
         testCapacityAndSize(array, 4, 5);
 
-        vector.add(100);
-        array.add(5);
+        array.append(5);
 
         assertEquals(5, array.get(4));
         testCapacityAndSize(array, 5, 5);
-        assertThrows(IndexOutOfBoundsException.class, () -> array.add(2));
+        assertThrows(IndexOutOfBoundsException.class, () -> array.append(2));
+        assertThrows(IndexOutOfBoundsException.class, () -> vector.append(100));
 
-        assertEquals(100, vector.get(5));
-        testCapacityAndSize(vector, 6, 10);
-
-
-        restartArray();
-        restartVector();
+        assertEquals(5, vector.get(4));
+        testCapacityAndSize(vector, 5, 5);
     }
 
     @Test
     void set() {
-        testCapacityAndSize(vector, 5, 5);
-        testCapacityAndSize(array, 4, 5);
-
-        assertEquals(1, array.set(0, 10));
-        assertEquals(1, vector.set(0, 20));
-
         testCapacityAndSize(array, 4, 5);
         testCapacityAndSize(vector, 5, 5);
 
-        assertEquals(10, array.get(0));
-        assertEquals(20, vector.get(0));
+        assertEquals(1, array.get(0));
+        assertEquals(1, vector.get(0));
 
-        array.set(4, 50);
-        vector.set(5, 100);
+        array.insert(4, 50);
+        vector.insert(4, 100);
 
         testCapacityAndSize(array, 5, 5);
-        testCapacityAndSize(vector, 6, 10);
+        testCapacityAndSize(vector, 5, 5);
 
         assertEquals(50, array.get(4));
-        assertEquals(100, vector.get(5));
+        assertEquals(100, vector.get(4));
 
-        assertThrows(IndexOutOfBoundsException.class, () -> array.set(5, 999));
         assertThrows(IndexOutOfBoundsException.class,
-                     () -> vector.set(-1, 999));
-
-        restartVector();
-        restartArray();
+                     () -> array.insert(5, 999));
+        assertThrows(IndexOutOfBoundsException.class,
+                     () -> vector.insert(-1, 999));
     }
 
     @Test
@@ -156,19 +158,14 @@ class AbstractArrayTest {
         testCapacityAndSize(vector, 5, 5);
         testCapacityAndSize(array, 4, 5);
 
-        array.removeElement(3);
-        vector.removeElement(4);
+        array.remove(3);
+        vector.remove(4);
 
         testCapacityAndSize(vector, 4, 5);
         testCapacityAndSize(array, 3, 5);
 
-        assertThrows(IllegalArgumentException.class,
-                     () -> array.removeElement(5));
-        assertThrows(IllegalArgumentException.class,
-                     () -> vector.removeElement(20));
-
-        restartVector();
-        restartArray();
+        assertEquals(Optional.empty(), array.remove(5));
+        assertEquals(Optional.empty(), vector.remove(20));
     }
 
     @Test
@@ -176,29 +173,25 @@ class AbstractArrayTest {
         testCapacityAndSize(vector, 5, 5);
         testCapacityAndSize(array, 4, 5);
 
-        array.remove(0);
-        vector.remove(0);
-
+        array.removeAt(0);
+        vector.removeAt(0);
 
         testCapacityAndSize(array, 3, 5);
         testCapacityAndSize(vector, 4, 5);
 
-        array.remove(0);
-        array.remove(0);
-        array.remove(0);
+        array.removeAt(0);
+        array.removeAt(0);
+        array.removeAt(0);
 
-        vector.remove(0);
-        vector.remove(0);
-        vector.remove(0);
+        vector.removeAt(0);
+        vector.removeAt(0);
+        vector.removeAt(0);
 
         testCapacityAndSize(array, 0, 5);
-        testCapacityAndSize(vector, 1, 2);
+        testCapacityAndSize(vector, 1, 5);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> array.remove(20));
-        assertThrows(IndexOutOfBoundsException.class, () -> vector.remove(20));
-
-        restartArray();
-        restartVector();
+        assertEquals(Optional.empty(), array.remove(20));
+        assertEquals(Optional.empty(), vector.remove(20));
     }
 
 }

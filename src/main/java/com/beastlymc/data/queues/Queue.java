@@ -43,7 +43,7 @@ public class Queue<E> {
     }
 
     public int size() {
-        return list.getSize();
+        return list.size();
     }
 
 
@@ -55,7 +55,7 @@ public class Queue<E> {
      * @param element the element to add to the Queue
      */
     public void offer(final E element) {
-        list.add(element);
+        list.append(element);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Queue<E> {
             return null;
         }
         E ele = list.get(0);
-        list.remove(0);
+        list.removeAt(0);
         return ele;
     }
 
