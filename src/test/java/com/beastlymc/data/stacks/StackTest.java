@@ -73,9 +73,7 @@ class StackTest {
 
         assertTrue(stack.contains(1));
         stack.push(2);
-
-        System.out.println(stack);
-
+        
         stack.push(3);
         assertTrue(stack.contains(2));
         assertTrue(stack.contains(3));
