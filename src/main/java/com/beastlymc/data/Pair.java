@@ -68,10 +68,7 @@ public class Pair<K, V> {
     }
 
     public Object[] toArray() {
-        Object[] objArr = new Object[2];
-        objArr[0] = getLeft();
-        objArr[1] = getRight();
-        return objArr;
+        return new Object[]{getLeft(), getRight()};
     }
 
     /**

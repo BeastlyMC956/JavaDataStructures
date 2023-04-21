@@ -61,6 +61,6 @@ public interface Map<K, V> {
      * otherwise
      */
     default boolean isEmpty() {
-        return size() == 0;
+        return this.size() == 0;
     }
 }

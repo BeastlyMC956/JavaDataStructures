@@ -151,9 +151,9 @@ public abstract class AbstractArray<E> implements Insertable<E> {
 
         sb.append("[");
         int index = 0;
-        for (E element : toArray()) {
+        for (E element : this) {
             if (element != null) {
-                if (index == array.length - 1) {
+                if (index == size() - 1) {
                     return sb.append(element).append("]").toString();
                 }
                 sb.append(element).append(",");

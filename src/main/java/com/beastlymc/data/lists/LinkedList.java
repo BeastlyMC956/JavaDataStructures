@@ -21,7 +21,7 @@ public class LinkedList<E> implements Insertable<E> {
      * @param <E> the same type of elements that is stored in the LinkedList.
      */
     private static final class Node<E> {
-        private E data;
+        private final E data;
         private Node<E> next;
 
         private Node(final E data) {
@@ -59,10 +59,12 @@ public class LinkedList<E> implements Insertable<E> {
 
         if (isEmpty()) {
             head = newNode;
+            tail = newNode;
         } else {
             tail.next = newNode;
+            tail = newNode;
         }
-        tail = newNode;
+
         size++;
     }
 
@@ -80,23 +82,41 @@ public class LinkedList<E> implements Insertable<E> {
 
     @Override
     public void insert(final int index, final E element) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException(index);
         }
-        Node<E> current = head;
-        for (int i = 0; i < index; i++) {
-            current = current.next;
+
+        if (index == 0) {
+            addFirst(element);
+            return;
         }
-        current.data = element;
+
+        Node<E> current = getNodeAt(index - 1);
+        Node<E> newNode = new Node<>(element);
+        newNode.next = current.next;
+        current.next = newNode;
+        size++;
     }
 
     @Override
     public Optional<E> remove(final E element) {
         Node<E> current = head;
-        for (int i = 0; i < size - 1; i++) {
+        Node<E> prev = null;
+
+        while (current != null) {
             if (current.data.equals(element)) {
-                return removeAt(i);
+                if (prev == null) {
+                    head = current.next;
+                } else {
+                    prev.next = current.next;
+                }
+                if (current.next == null) {
+                    tail = prev;
+                }
+                size--;
+                return Optional.of(current.data);
             }
+            prev = current;
             current = current.next;
         }
         return Optional.empty();
@@ -112,6 +132,9 @@ public class LinkedList<E> implements Insertable<E> {
         if (index == 0) {
             returnNode = Optional.of(head.data);
             head = head.next;
+            if (head == null) {
+                tail = null;
+            }
         } else {
             Node<E> current = head;
             for (int i = 0; i < index - 1; i++) {
@@ -119,6 +142,9 @@ public class LinkedList<E> implements Insertable<E> {
             }
             returnNode = Optional.of(current.next.data);
             current.next = current.next.next;
+            if (current.next == null) {
+                tail = current;
+            }
         }
         size--;
         return returnNode;
@@ -134,6 +160,11 @@ public class LinkedList<E> implements Insertable<E> {
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     public E get(final int index) {
+        Node<E> node = getNodeAt(index);
+        return node.data;
+    }
+
+    private Node<E> getNodeAt(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
@@ -143,7 +174,7 @@ public class LinkedList<E> implements Insertable<E> {
             current = current.next;
         }
 
-        return current.data;
+        return current;
     }
 
     /**
@@ -151,12 +182,8 @@ public class LinkedList<E> implements Insertable<E> {
      */
     @Override
     public void clear() {
-        if (size() == 0) {
-            return;
-        }
-
-        for (int i = 0; i < size(); i++) {
-            removeAt(i);
+        while (!isEmpty()) {
+            removeAt(size() - 1);
         }
     }
 
@@ -183,7 +210,7 @@ public class LinkedList<E> implements Insertable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new LinkedListIterator<>(head);
+        return new LinkedListIterator<>(this);
     }
 
     /**
@@ -208,9 +235,11 @@ public class LinkedList<E> implements Insertable<E> {
     private static class LinkedListIterator<E> implements Iterator<E> {
 
         private Node<E> current;
+        private final LinkedList<E> list;
 
-        public LinkedListIterator(Node<E> head) {
-            current = head;
+        public LinkedListIterator(LinkedList<E> list) {
+            this.list = list;
+            this.current = list.head;
         }
 
         @Override

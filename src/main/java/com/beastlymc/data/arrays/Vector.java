@@ -100,7 +100,7 @@ public class Vector<E> extends AbstractArray<E> {
 
     @Override
     public synchronized Iterator<E> iterator() {
-        return new VectorIterator<>(length());
+        return new VectorIterator<>(this);
     }
 
     @Override
@@ -127,8 +127,8 @@ public class Vector<E> extends AbstractArray<E> {
          *
          * @param capacity the capacity of the Vector
          */
-        public VectorIterator(int capacity) {
-            vector = new Vector<>(capacity);
+        public VectorIterator(Vector<E> vector) {
+            this.vector = vector;
             index = 0;
         }
 

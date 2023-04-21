@@ -34,7 +34,7 @@ public class Array<E> extends AbstractArray<E> {
             throw new IndexOutOfBoundsException(index);
         }
 
-        size = Math.max(index + 1, size);
+        size++;
         array[index] = element;
     }
 
@@ -63,7 +63,7 @@ public class Array<E> extends AbstractArray<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new ArrayIterator<>(array.length);
+        return new ArrayIterator<>(this);
     }
 
 
@@ -87,8 +87,8 @@ public class Array<E> extends AbstractArray<E> {
          *
          * @param capacity the capacity of the Array
          */
-        public ArrayIterator(int capacity) {
-            array = new Array<>(capacity);
+        public ArrayIterator(Array<E> array) {
+            this.array = array;
             index = 0;
         }
 

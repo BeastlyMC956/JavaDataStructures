@@ -53,6 +53,8 @@ class AbstractArrayTest {
 
     @Test
     void testIterator() {
+        assertTrue(array.iterator().hasNext());
+
         int index = 0;
         for (Integer ints : array) {
             assertEquals(ints, array.get(index));

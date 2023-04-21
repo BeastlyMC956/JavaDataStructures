@@ -52,5 +52,4 @@ public interface Insertable<E> extends Collection<E> {
      * @throws IndexOutOfBoundsException if the provided index can't be reached
      */
     Optional<E> removeAt(final int index) throws IndexOutOfBoundsException;
-
 }
