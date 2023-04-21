@@ -1,16 +1,27 @@
 package com.beastlymc.data.stacks;
 
 import com.beastlymc.data.arrays.Array;
+import com.beastlymc.data.common.Pushable;
+
+import java.util.Iterator;
+import java.util.Optional;
 
 /**
  * The Stack class represents a Last-In-First-Out (LIFO) stack data structure
  * that stores elements of type E.
  *
- * @param <E> the type of elements stored in the Stack.
+ * <p>This implementation is based on an underlying array and provides basic
+ * stack operations such as push, pop, and peek, as well as other common
+ * operations like size, clearing, and checking if the stack contains a specific
+ * element.
+ *
+ * @param <E> the type of elements stored in the Stack
  */
-public class Stack<E> {
+public class Stack<E> implements Pushable<E> {
+    private static final int DEFAULT_CAPACITY = 16;
     private int top;
     private final Array<E> data;
+
 
     /**
      * Constructs a new Stack with the specified capacity.
@@ -23,17 +34,19 @@ public class Stack<E> {
     }
 
     /**
-     * @return true if the Stack is empty, false otherwise
+     * Constructs a new Stack with the default capacity of 16.
      */
-    public boolean isEmpty() {
-        return top == -1;
+    public Stack() {
+        this(DEFAULT_CAPACITY);
     }
 
     /**
+     * Checks if the Stack is full.
+     *
      * @return true if the Stack is full, false otherwise
      */
     public boolean isFull() {
-        return top == data.getCapacity() - 1;
+        return top == data.length() - 1;
     }
 
     /**
@@ -43,41 +56,95 @@ public class Stack<E> {
      *
      * @throws IllegalStateException if the Stack is full
      */
+    @Override
     public void push(final E value) {
         if (isFull()) {
             throw new IllegalStateException("Stack is full");
         }
+
         top++;
-        data.add(value);
+        for (int i = top; i >= 1; i--) {
+            data.insert(i, data.get(i - 1));
+        }
+        data.insert(0, value);
+
     }
 
     /**
      * Removes and returns the element at the top of the Stack.
      *
-     * @return the element at the top of the Stack
-     *
-     * @throws IllegalStateException if the Stack is empty
+     * @return an {@link Optional} containing the element at the top of the
+     * Stack, or {@link Optional#empty()} if the Stack is empty
      */
-    public E pop() {
+    @Override
+    public Optional<E> pop() {
         if (isEmpty()) {
-            throw new IllegalStateException("Stack is empty");
+            return Optional.empty();
         }
         E element = data.get(top);
+        data.remove(element);
         top--;
-        return element;
+        return Optional.of(element);
     }
 
     /**
      * Returns the element at the top of the Stack without removing it.
      *
-     * @return the element at the top of the Stack
-     *
-     * @throws IllegalStateException if the Stack is empty
+     * @return an {@link Optional} containing the element at the top of the
+     * Stack, or {@link Optional#empty()} if the Stack is empty
      */
-    public E peek() {
+    @Override
+    public Optional<E> peek() {
         if (isEmpty()) {
-            throw new IllegalStateException("Stack is empty");
+            return Optional.empty();
         }
-        return data.get(top);
+        return Optional.of(data.get(0));
+    }
+
+    /**
+     * @return the number of elements in the Stack
+     */
+    @Override
+    public int size() {
+        return data.size();
+    }
+
+    /**
+     * Removes all elements from the Stack.
+     */
+    @Override
+    public void clear() {
+        data.clear();
+    }
+
+    /**
+     * Checks if the Stack contains the specified element.
+     *
+     * @param element the element to search for
+     *
+     * @return true if the Stack contains the element, false otherwise
+     */
+    @Override
+    public boolean contains(final E element) {
+        return data.contains(element);
+    }
+
+    /**
+     * Returns an iterator over the elements in the Stack, from the top to the
+     * bottom.
+     *
+     * @return an iterator over the elements in the Stack
+     */
+    @Override
+    public Iterator<E> iterator() {
+        return data.iterator();
+    }
+
+    /**
+     * @return a string representation of the Stack
+     */
+    @Override
+    public String toString() {
+        return "Stack{" + "list=" + data + '}';
     }
 }

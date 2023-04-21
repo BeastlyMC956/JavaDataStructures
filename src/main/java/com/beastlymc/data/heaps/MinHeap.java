@@ -34,10 +34,10 @@ public class MinHeap<T extends Comparable<T>> extends Heap<T> {
      */
     @Override
     public void insert(final T element) {
-        if (size == heapArray.getCapacity()) {
+        if (size == heapArray.length()) {
             throw new IllegalStateException("Heap is full");
         }
-        heapArray.set(size, element);
+        heapArray.insert(size, element);
         heapifyUp(size);
         size++;
     }
@@ -57,7 +57,7 @@ public class MinHeap<T extends Comparable<T>> extends Heap<T> {
         }
 
         T minElement = heapArray.get(0);
-        heapArray.set(0, heapArray.get(size - 1));
+        heapArray.insert(0, heapArray.get(size - 1));
         size--;
         heapifyDown(0);
         return minElement;

@@ -1,158 +1,125 @@
 package com.beastlymc.data.arrays;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 /**
- * An implementation of the {@link AbstractArray} class that uses a plain fixed
- * array to store elements.
+ * The Array class is a fixed-size array that extends the {@link AbstractArray}
+ * class and implementing the {@link com.beastlymc.data.common.Insertable}
+ * interface. It provides methods for inserting, removing, and querying elements
+ * in the array. The class is parameterized over a type E, which represents the
+ * type of elements stored in the array.
  *
- * @param <E> the type of elements stored in the array.
+ * @param <E> the type of elements stored in the Array
  */
 public class Array<E> extends AbstractArray<E> {
 
     /**
-     * The backing array for the elements stored in this instance.
-     */
-    private final E[] arr;
-
-    /**
-     * The current size of this instance, i.e. the number of elements it
-     * contains.
+     * The current size of the array
      */
     private int size;
 
     /**
-     * Constructs a new Array instance with the specified capacity.
+     * Constructs a new Array object with the specified capacity.
      *
-     * @param capacity the capacity of the array.
+     * @param capacity the capacity of the array
      */
     public Array(final int capacity) {
         super(capacity);
         size = 0;
-        arr = (E[]) new Object[capacity];
     }
 
-    /**
-     * Returns an array containing all the elements in this instance in proper
-     * sequence.
-     *
-     * @return an array containing all the elements in this instance.
-     */
     @Override
-    public E[] toArray() {
-        return arr;
-    }
-
-    /**
-     * Appends the specified element to the end of this instance.
-     *
-     * @param element the element to add.
-     *
-     * @throws ArrayIndexOutOfBoundsException if the array is full.
-     */
-    @Override
-    public void add(E element) {
-        if (size == arr.length) {
-            throw new ArrayIndexOutOfBoundsException("The array is full");
-        }
-
-        arr[size] = element;
-        size++;
-    }
-
-    /**
-     * Replaces the element at the specified position in this instance with the
-     * specified element.
-     *
-     * @param index   the index of the element to replace.
-     * @param element the element to be stored at the specified position.
-     *
-     * @return the element previously at the specified position.
-     *
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0
-     *                                   || index >= capacity).
-     */
-    @Override
-    public E set(final int index, final E element) {
-        if (index < 0 || index >= getCapacity()) {
+    public void insert(final int index, final E element) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= array.length) {
             throw new IndexOutOfBoundsException(index);
         }
 
-        E prev = arr[index];
-
-        size = Math.max(index + 1, size);
-        arr[index] = element;
-
-        return prev;
+        size = Math.max(size, index + 1);
+        array[index] = element;
     }
 
-    /**
-     * Removes the first occurrence of the specified element from this instance,
-     * if it is present.
-     *
-     * @param element the element to be removed from this instance, if present.
-     *
-     * @return the removed element if it was present
-     *
-     * @throws IllegalArgumentException if the element can't be found
-     */
     @Override
-    public E removeElement(final E element) {
-        int index = indexOf(element);
-
-        if (index != -1) {
-            return remove(index);
-        }
-        throw new IllegalArgumentException("Can't find (" + element + ")");
-    }
-
-    /**
-     * Removes the element at the specified position in this instance.
-     *
-     * @param index the index of the element to be removed.
-     *
-     * @return the element previously at the specified position.
-     *
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0
-     *                                   || index >= size).
-     */
-    @Override
-    public E remove(final int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException(index);
-        }
-
-        E ret = arr[index];
-
-        for (int i = index + 1; i < size; i++) {
-            arr[i - 1] = arr[i];
-        }
-
+    public Optional<E> removeAt(final int index) {
         size--;
-        arr[size] = null;
-
-        return ret;
+        return super.removeAt(index);
     }
 
-    /**
-     * @return the number of elements in this instance.
-     */
     @Override
-    public int getSize() {
+    public int size() {
         return size;
     }
 
-    /**
-     * Removes all the elements from this instance.
-     */
     @Override
     public void clear() {
-        if (getSize() == 0) {
-            return;
-        }
-
-        for (int i = 0; i < getSize(); i++) {
-            arr[i] = null;
-        }
-
+        int length = length();
+        array = (E[]) new Object[length];
         size = 0;
+    }
+
+    @Override
+    public E[] toArray() {
+        return array;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ArrayIterator<>(this);
+    }
+
+
+    /**
+     * The ArrayIterator class is an iterator over the elements in the Array
+     * class.
+     */
+    private static class ArrayIterator<E> implements Iterator<E> {
+        /**
+         * The Array to iterate over
+         */
+        private final Array<E> array;
+
+        /**
+         * The current index in the Array
+         */
+        private int index;
+
+        /**
+         * Constructs a new ArrayIterator object with the specified capacity.
+         *
+         * @param capacity the capacity of the Array
+         */
+        public ArrayIterator(Array<E> array) {
+            this.array = array;
+            index = 0;
+        }
+
+        /**
+         * @return true if the Array has more elements to iterate over, false
+         * otherwise
+         */
+        @Override
+        public boolean hasNext() {
+            return index != array.size();
+        }
+
+        /**
+         * Returns the next element in the Array and advances the iterator.
+         *
+         * @return the next element in the Array
+         *
+         * @throws NoSuchElementException if there are no more elements to
+         *                                iterate over
+         */
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            E data = array.get(index);
+            index++;
+            return data;
+        }
     }
 }

@@ -25,6 +25,13 @@ public class Pair<K, V> {
     }
 
     /**
+     * Constructor for an empty Pair.
+     */
+    public Pair() {
+        this(null, null);
+    }
+
+    /**
      * Sets the value of the left-side value in the pair.
      *
      * @param leftSide the value to use as the left-side value in the pair
@@ -60,11 +67,13 @@ public class Pair<K, V> {
         return rightSide;
     }
 
+    /**
+     * Returns an array object of the pair
+     *
+     * @return an array object of the pair
+     */
     public Object[] toArray() {
-        Object[] objArr = new Object[2];
-        objArr[0] = getLeft();
-        objArr[1] = getRight();
-        return objArr;
+        return new Object[]{getLeft(), getRight()};
     }
 
     /**
