@@ -12,6 +12,8 @@ import java.util.Optional;
  * for inserting, removing, and querying elements in the array. The class is
  * parameterized over a type E, which represents the type of elements stored in
  * the array.
+ *
+ * @param <E> the type of elements stored in the Vector
  */
 public class Vector<E> extends AbstractArray<E> {
 

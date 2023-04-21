@@ -27,17 +27,39 @@ public class HashMap<K, V> implements Map<K, V> {
      * The array used to store the hash map.
      */
     private Array<LinkedList<Entry<K, V>>> table;
+
+    /**
+     * The amount of elements in the table
+     */
     private int size;
 
+    /**
+     * Constructs a HashMap with a given capacity
+     *
+     * @param initialCapacity the initial capacity of the hash map
+     */
     public HashMap(int initialCapacity) {
         table = new Array<>(initialCapacity);
         size = 0;
     }
 
+    /**
+     * Constructs a HashMap with the default capacity of 16
+     */
     public HashMap() {
         this(DEFAULT_CAPACITY);
     }
 
+    /**
+     * Associates the specified value with the specified key in this
+     * collection.
+     *
+     * @param key   the key with which the specified value is to be associated
+     * @param value the value to be associated with the specified key
+     *
+     * @return the previous value associated with the key, or null if there was
+     * no mapping for the key
+     */
     @Override
     public V put(final K key, final V value) {
         int index = hash(key) % table.length();
@@ -117,11 +139,19 @@ public class HashMap<K, V> implements Map<K, V> {
         return false;
     }
 
+    /**
+     * Returns the number of key-value mappings in this HashMap
+     *
+     * @return the number of key-value mappings in this HashMap
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Removes all mappings from this HashMap.
+     */
     @Override
     public void clear() {
         int length = table.size();

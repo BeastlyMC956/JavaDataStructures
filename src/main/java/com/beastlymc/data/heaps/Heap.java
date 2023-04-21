@@ -16,7 +16,15 @@ import com.beastlymc.data.arrays.Array;
  * @see Comparable
  */
 public abstract class Heap<T extends Comparable<T>> {
+
+    /**
+     * The representation of the heap
+     */
     protected final Array<T> heapArray;
+
+    /**
+     * The amount of elements in the heap
+     */
     protected int size;
 
     /**
@@ -81,9 +89,11 @@ public abstract class Heap<T extends Comparable<T>> {
 
 
     /**
+     * Returns the size of the {@link Heap}
+     *
      * @return the size of the {@link Heap}
      */
-    public int getSize() {
+    public int size() {
         return size;
     }
 

@@ -33,6 +33,9 @@ public class Stack<E> implements Pushable<E> {
         data = new Array<>(capacity);
     }
 
+    /**
+     * Constructs a new Stack with the default capacity of 16.
+     */
     public Stack() {
         this(DEFAULT_CAPACITY);
     }

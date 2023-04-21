@@ -10,6 +10,8 @@ import java.util.Optional;
  * interface. It provides methods for inserting, removing, and querying elements
  * in the array. The class is parameterized over a type E, which represents the
  * type of elements stored in the array.
+ *
+ * @param <E> the type of elements stored in the Array
  */
 public class Array<E> extends AbstractArray<E> {
 

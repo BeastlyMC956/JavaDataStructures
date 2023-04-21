@@ -10,6 +10,8 @@ import java.util.Iterator;
 public interface Collection<E> extends Iterable<E> {
 
     /**
+     * Returns the number of elements in this collection
+     *
      * @return the number of elements in this collection
      */
     int size();
@@ -20,6 +22,8 @@ public interface Collection<E> extends Iterable<E> {
     void clear();
 
     /**
+     * Checks if this collection contains no elements
+     *
      * @return true if this collection contains no elements, false otherwise
      */
     default boolean isEmpty() {

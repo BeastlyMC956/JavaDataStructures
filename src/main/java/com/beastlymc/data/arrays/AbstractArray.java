@@ -9,6 +9,8 @@ import java.util.Optional;
  * {@link Insertable} interface. It provides a basic implementation of an array
  * that can be inserted, removed, and queried. The class is parameterized over a
  * type E, which represents the type of elements stored in the array.
+ *
+ * @param <E> the type of elements stored in the Array
  */
 public abstract class AbstractArray<E> implements Insertable<E> {
 
@@ -87,6 +89,8 @@ public abstract class AbstractArray<E> implements Insertable<E> {
     }
 
     /**
+     * Returns the length of the array
+     *
      * @return the length of the array
      */
     public int length() {
@@ -138,6 +142,8 @@ public abstract class AbstractArray<E> implements Insertable<E> {
     }
 
     /**
+     * Returns an array containing all the elements in the array
+     *
      * @return an array containing all the elements in the array
      */
     public abstract E[] toArray();

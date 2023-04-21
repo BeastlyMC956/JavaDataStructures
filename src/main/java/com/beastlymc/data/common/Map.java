@@ -1,5 +1,12 @@
 package com.beastlymc.data.common;
 
+/**
+ * An object that maps keys to values. A map cannot contain duplicate keys; each
+ * key can map to at most one value.
+ *
+ * @param <K> the type of keys maintained by this map
+ * @param <V> the type of mapped values
+ */
 public interface Map<K, V> {
     /**
      * Associates the specified value with the specified key in this
@@ -47,6 +54,8 @@ public interface Map<K, V> {
     boolean containsKey(final K key);
 
     /**
+     * Returns the number of key-value mappings in this collection
+     *
      * @return the number of key-value mappings in this collection
      */
     int size();
@@ -57,6 +66,8 @@ public interface Map<K, V> {
     void clear();
 
     /**
+     * Checks if this collection contains no key-value mappings
+     *
      * @return true if this collection contains no key-value mappings, false
      * otherwise
      */

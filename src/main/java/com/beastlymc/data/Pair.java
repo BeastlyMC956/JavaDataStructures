@@ -67,6 +67,11 @@ public class Pair<K, V> {
         return rightSide;
     }
 
+    /**
+     * Returns an array object of the pair
+     *
+     * @return an array object of the pair
+     */
     public Object[] toArray() {
         return new Object[]{getLeft(), getRight()};
     }
