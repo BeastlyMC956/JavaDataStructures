@@ -2,6 +2,8 @@ package com.beastlymc.data.trees;
 
 import com.beastlymc.data.queues.Queue;
 
+import java.util.Optional;
+
 /**
  * The BinaryTree class is a concrete implementation of the AbstractBinaryTree
  * class that represents a binary tree data structure with elements of type E.
@@ -23,23 +25,27 @@ public class BinaryTree<T> extends AbstractBinaryTree<T> {
         }
 
         Queue<Node<T>> queue = new Queue<>();
-        queue.offer(root);
+        queue.push(root);
 
         while (!queue.isEmpty()) {
-            Node<T> currentNode = queue.poll();
+            Optional<Node<T>> currentNode = queue.pop();
 
-            if (currentNode.leftChild == null) {
-                currentNode.leftChild = newNode;
-                return;
-            } else {
-                queue.offer(currentNode.leftChild);
+            if (currentNode.isEmpty()) {
+                continue;
             }
 
-            if (currentNode.rightChild == null) {
-                currentNode.rightChild = newNode;
+            if (currentNode.get().leftChild == null) {
+                currentNode.get().leftChild = newNode;
                 return;
             } else {
-                queue.offer(currentNode.rightChild);
+                queue.push(currentNode.get().leftChild);
+            }
+
+            if (currentNode.get().rightChild == null) {
+                currentNode.get().rightChild = newNode;
+                return;
+            } else {
+                queue.push(currentNode.get().rightChild);
             }
         }
     }
@@ -51,21 +57,25 @@ public class BinaryTree<T> extends AbstractBinaryTree<T> {
         }
 
         Queue<Node<T>> queue = new Queue<>();
-        queue.offer(root);
+        queue.push(root);
 
         while (!queue.isEmpty()) {
-            Node<T> currentNode = queue.poll();
+            Optional<Node<T>> currentNode = queue.pop();
 
-            if (currentNode.data.equals(data)) {
+            if (currentNode.isEmpty()) {
+                continue;
+            }
+
+            if (currentNode.get().data.equals(data)) {
                 return true;
             }
 
-            if (currentNode.leftChild != null) {
-                queue.offer(currentNode.leftChild);
+            if (currentNode.get().leftChild != null) {
+                queue.push(currentNode.get().leftChild);
             }
 
-            if (currentNode.rightChild != null) {
-                queue.offer(currentNode.rightChild);
+            if (currentNode.get().rightChild != null) {
+                queue.push(currentNode.get().rightChild);
             }
         }
 
@@ -79,26 +89,30 @@ public class BinaryTree<T> extends AbstractBinaryTree<T> {
         }
 
         Queue<Node<T>> queue = new Queue<>();
-        queue.offer(root);
+        queue.push(root);
 
         Node<T> nodeToDelete = null;
         Node<T> deepestNode = null;
 
         while (!queue.isEmpty()) {
-            Node<T> currentNode = queue.poll();
+            Optional<Node<T>> currentNode = queue.pop();
 
-            if (currentNode.data.equals(data)) {
-                nodeToDelete = currentNode;
+            if (currentNode.isEmpty()) {
+                continue;
             }
 
-            if (currentNode.leftChild != null) {
-                queue.offer(currentNode.leftChild);
-                deepestNode = currentNode.leftChild;
+            if (currentNode.get().data.equals(data)) {
+                nodeToDelete = currentNode.get();
             }
 
-            if (currentNode.rightChild != null) {
-                queue.offer(currentNode.rightChild);
-                deepestNode = currentNode.rightChild;
+            if (currentNode.get().leftChild != null) {
+                queue.push(currentNode.get().leftChild);
+                deepestNode = currentNode.get().leftChild;
+            }
+
+            if (currentNode.get().rightChild != null) {
+                queue.push(currentNode.get().rightChild);
+                deepestNode = currentNode.get().rightChild;
             }
         }
 
@@ -106,26 +120,30 @@ public class BinaryTree<T> extends AbstractBinaryTree<T> {
             nodeToDelete.data = deepestNode.data;
 
             queue.clear();
-            queue.offer(root);
+            queue.push(root);
 
             while (!queue.isEmpty()) {
-                Node<T> currentNode = queue.poll();
+                Optional<Node<T>> currentNode = queue.pop();
 
-                if (currentNode.leftChild != null) {
-                    if (currentNode.leftChild == deepestNode) {
-                        currentNode.leftChild = null;
+                if (currentNode.isEmpty()) {
+                    continue;
+                }
+
+                if (currentNode.get().leftChild != null) {
+                    if (currentNode.get().leftChild == deepestNode) {
+                        currentNode.get().leftChild = null;
                         return;
                     } else {
-                        queue.offer(currentNode.leftChild);
+                        queue.push(currentNode.get().leftChild);
                     }
                 }
 
-                if (currentNode.rightChild != null) {
-                    if (currentNode.rightChild == deepestNode) {
-                        currentNode.rightChild = null;
+                if (currentNode.get().rightChild != null) {
+                    if (currentNode.get().rightChild == deepestNode) {
+                        currentNode.get().rightChild = null;
                         return;
                     } else {
-                        queue.offer(currentNode.rightChild);
+                        queue.push(currentNode.get().rightChild);
                     }
                 }
             }

@@ -21,12 +21,12 @@ class LinkedListTest {
         assertTrue(list.isEmpty());
         assertEquals(0, list.size());
 
-        list.append(1);
+        list.add(1);
         assertFalse(list.isEmpty());
         assertEquals(1, list.size());
         assertEquals(1, list.get(0));
 
-        list.append(2);
+        list.add(2);
         assertFalse(list.isEmpty());
         assertEquals(2, list.size());
         assertEquals(1, list.get(0));
@@ -92,9 +92,9 @@ class LinkedListTest {
         assertTrue(list.isEmpty());
         assertEquals(0, list.size());
 
-        list.append(1);
-        list.append(2);
-        list.append(3);
+        list.add(1);
+        list.add(2);
+        list.add(3);
 
         removed = list.remove(2);
         assertTrue(removed.isPresent());
@@ -130,9 +130,9 @@ class LinkedListTest {
 
         assertThrows(IndexOutOfBoundsException.class, () -> list.removeAt(0));
 
-        list.append(1);
-        list.append(2);
-        list.append(3);
+        list.add(1);
+        list.add(2);
+        list.add(3);
 
         assertThrows(IndexOutOfBoundsException.class, () -> list.removeAt(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> list.removeAt(3));
@@ -170,9 +170,9 @@ class LinkedListTest {
         assertTrue(list.isEmpty());
         assertEquals(0, list.size());
 
-        list.append(1);
-        list.append(2);
-        list.append(3);
+        list.add(1);
+        list.add(2);
+        list.add(3);
 
         assertFalse(list.isEmpty());
         assertEquals(3, list.size());
@@ -188,11 +188,11 @@ class LinkedListTest {
         assertEquals(0, list.size());
         assertFalse(list.contains(1));
 
-        list.append(1);
+        list.add(1);
         assertTrue(list.contains(1));
         assertFalse(list.contains(2));
 
-        list.append(2);
+        list.add(2);
         assertTrue(list.contains(1));
         assertTrue(list.contains(2));
         assertFalse(list.contains(3));
@@ -200,9 +200,9 @@ class LinkedListTest {
 
     @Test
     void testIterator() {
-        list.append(1);
-        list.append(2);
-        list.append(3);
+        list.add(1);
+        list.add(2);
+        list.add(3);
 
         assertTrue(list.iterator().hasNext());
         int index = 0;

@@ -26,7 +26,7 @@ public interface Insertable<E> extends Collection<E> {
      *
      * @param element the element to append
      */
-    default void append(final E element) {
+    default void add(final E element) {
         insert(size(), element);
     }
 

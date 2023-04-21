@@ -54,7 +54,7 @@ public class LinkedList<E> implements Insertable<E> {
      * @param element the element to add to the LinkedList
      */
     @Override
-    public void append(final E element) {
+    public void add(final E element) {
         Node<E> newNode = new Node<>(element);
 
         if (isEmpty()) {

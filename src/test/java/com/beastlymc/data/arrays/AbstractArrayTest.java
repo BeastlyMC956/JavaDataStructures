@@ -17,16 +17,16 @@ class AbstractArrayTest {
         vector = new Vector<>(5);
         array = new Array<>(5);
 
-        array.append(1);
-        array.append(2);
-        array.append(3);
-        array.append(4);
+        array.add(1);
+        array.add(2);
+        array.add(3);
+        array.add(4);
 
-        vector.append(1);
-        vector.append(2);
-        vector.append(3);
-        vector.append(4);
-        vector.append(5);
+        vector.add(1);
+        vector.add(2);
+        vector.add(3);
+        vector.add(4);
+        vector.add(5);
     }
 
     private void testCapacityAndSize(final AbstractArray<Integer> abstractArray, final int size, final int capacity) {
@@ -71,11 +71,11 @@ class AbstractArrayTest {
     @Test
     void stringTest() {
         Vector<Integer> newVector = new Vector<>(5);
-        newVector.append(1);
-        newVector.append(2);
-        newVector.append(3);
-        newVector.append(4);
-        newVector.append(5);
+        newVector.add(1);
+        newVector.add(2);
+        newVector.add(3);
+        newVector.add(4);
+        newVector.add(5);
         assertEquals(newVector.toString(), vector.toString());
     }
 
@@ -121,12 +121,12 @@ class AbstractArrayTest {
         testCapacityAndSize(vector, 5, 5);
         testCapacityAndSize(array, 4, 5);
 
-        array.append(5);
+        array.add(5);
 
         assertEquals(5, array.get(4));
         testCapacityAndSize(array, 5, 5);
-        assertThrows(IndexOutOfBoundsException.class, () -> array.append(2));
-        assertThrows(IndexOutOfBoundsException.class, () -> vector.append(100));
+        assertThrows(IndexOutOfBoundsException.class, () -> array.add(2));
+        assertThrows(IndexOutOfBoundsException.class, () -> vector.add(100));
 
         assertEquals(5, vector.get(4));
         testCapacityAndSize(vector, 5, 5);

@@ -54,7 +54,7 @@ public class HashMap<K, V> implements Map<K, V> {
             }
         }
 
-        table.get(index).append(new Entry<>(key, value));
+        table.get(index).add(new Entry<>(key, value));
         size++;
 
         if (size > table.size() * LOAD_FACTOR) {
@@ -146,7 +146,7 @@ public class HashMap<K, V> implements Map<K, V> {
                         newTable[index] = new LinkedList<>();
                     }
 
-                    newTable[index].append(entry);
+                    newTable[index].add(entry);
                 }
             }
         }

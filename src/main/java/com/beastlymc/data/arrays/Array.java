@@ -34,7 +34,7 @@ public class Array<E> extends AbstractArray<E> {
             throw new IndexOutOfBoundsException(index);
         }
 
-        size++;
+        size = Math.max(size, index + 1);
         array[index] = element;
     }
 

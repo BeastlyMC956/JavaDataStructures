@@ -56,8 +56,8 @@ public class Vector<E> extends AbstractArray<E> {
     }
 
     @Override
-    public synchronized void append(final E element) {
-        super.append(element);
+    public synchronized void add(final E element) {
+        super.add(element);
     }
 
     @Override

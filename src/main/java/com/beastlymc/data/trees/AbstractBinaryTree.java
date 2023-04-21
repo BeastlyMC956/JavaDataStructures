@@ -2,6 +2,8 @@ package com.beastlymc.data.trees;
 
 import com.beastlymc.data.queues.Queue;
 
+import java.util.Optional;
+
 /**
  * An abstract class representing a binary tree data structure.
  *
@@ -67,21 +69,21 @@ public abstract class AbstractBinaryTree<T> {
         }
 
         Queue<Node<T>> queue = new Queue<>();
-        queue.offer(root);
+        queue.push(root);
 
         while (!queue.isEmpty()) {
             int levelSize = queue.size();
 
             for (int i = 0; i < levelSize; i++) {
-                Node<T> currentNode = queue.poll();
+                Optional<Node<T>> currentNode = queue.pop();
 
-                if (currentNode == null) {
+                if (currentNode.isEmpty()) {
                     sb.append("  ");
                 } else {
-                    sb.append(currentNode.data.toString()).append(" ");
+                    sb.append(currentNode.get().data.toString()).append(" ");
 
-                    queue.offer(currentNode.leftChild);
-                    queue.offer(currentNode.rightChild);
+                    queue.push(currentNode.get().leftChild);
+                    queue.push(currentNode.get().rightChild);
                 }
             }
 
