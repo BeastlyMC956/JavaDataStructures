@@ -15,9 +15,8 @@ other developers wanting to implement their own data structures.
 
 ## Getting Started
 
-To use the JavaDataStructures library in your own project, simply clone or download the repository and add the relevant
-Java files to your project's source directory. You can then import the classes you need and start using the data
-structures right away.
+To use the JavaDataStructures library in your own project, simply download the latest [release](https://github.com/BeastlyMC956/JavaDataStructures/releases) 
+and add it to your projects libraries. The files provided in the release has the JavaDoc and sources attached.
 
 For more information on how to use the JavaDataStructures library, please see
 the [documentation](https://github.com/BeastlyMC956/JavaDataStructures/wiki).
