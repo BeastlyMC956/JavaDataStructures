@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.beastlymc.data</groupId>
-    <artifactId>DataStructureAPI</artifactId>
+    <artifactId>JavaDataStructures</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -29,7 +29,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>DataStructureAPI</finalName>
+        <finalName>JavaDataStructures</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
